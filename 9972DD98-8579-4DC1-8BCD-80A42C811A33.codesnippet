@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccstring</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;
+@property (copy, nonatomic) NSString *sss;</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>9972DD98-8579-4DC1-8BCD-80A42C811A33</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>创建很多个字符串</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

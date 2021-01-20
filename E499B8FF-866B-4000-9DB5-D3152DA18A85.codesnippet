@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cctime</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//    手机屏幕刷新率60次/s，获取屏幕刷新率对象，模拟器没有刷新率
+    //    添加到世界循环
+    //    屏幕梅刷新一次就会调用一次displayMethod，可以设置一个全局变量value来控制事件
+    CADisplayLink *link = [CADisplayLink displayLinkWithTarget:self selector:@selector(&lt;#fun#&gt;)];
+    [link addToRunLoop:[NSRunLoop currentRunLoop] forMode:NSDefaultRunLoopMode];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>E499B8FF-866B-4000-9DB5-D3152DA18A85</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>监听屏幕刷新，定时</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccbanner</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>    NSArray *images = @[@"https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1571748210623&amp;di=0fbe332c01b32b888f4b54e11c15e23d&amp;imgtype=0&amp;src=http%3A%2F%2F5b0988e595225.cdn.sohucs.com%2Fimages%2F20181220%2F9afcfadb0e1649ea8b17d68426e8396b.jpeg",
+                        @"https://ss2.bdstatic.com/70cFvnSh_Q1YnxGkpoWK1HF6hhy/it/u=1146033709,2918860111&amp;fm=15&amp;gp=0.jpg",
+                        @"https://timgsa.baidu.com/timg?image&amp;quality=80&amp;size=b9999_10000&amp;sec=1572342976&amp;di=6cde20599366de7f38858b3986931d76&amp;imgtype=jpg&amp;er=1&amp;src=http%3A%2F%2Fpic.rmb.bdstatic.com%2Ffcfb9eaa4461b42ff5c6909c37cdc77b.jpeg"];
+    
+    _bannerView.imageURLStringsGroup = images;
+    _bannerView.autoScrollTimeInterval = 5;</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>615AF0D6-D0F2-4530-BE90-DB1F54133025</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>轮播图预放</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

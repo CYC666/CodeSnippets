@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cctextview</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>- (BOOL)textViewShouldBeginEditing:(UITextView *)textView {
+    
+    _tipLabel.hidden = YES;
+    
+    return 1;
+}
+- (BOOL)textViewShouldEndEditing:(UITextView *)textView {
+    
+    if ([textView.text isEqualToString:@""]) {
+        _tipLabel.hidden = NO;
+    } else {
+        _tipLabel.hidden = YES;
+    }
+    
+    return 1;
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>30E98BBB-5CA5-48A7-A8E4-22CD677280AE</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>显示隐藏textView的placeholder</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

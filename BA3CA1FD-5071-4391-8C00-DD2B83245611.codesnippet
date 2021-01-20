@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccmovie</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 视频
+            NSURL *url = [NSURL URLWithString:[NSString stringWithFormat:@"%@%@", Image_Base_URL, model.filepath]];
+            AVPlayerViewController *ctrl = [[AVPlayerViewController alloc] init];
+            ctrl.player = [[AVPlayer alloc] initWithURL:url];
+            [self presentViewController:ctrl animated:YES completion:nil];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>BA3CA1FD-5071-4391-8C00-DD2B83245611</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>播放视频</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

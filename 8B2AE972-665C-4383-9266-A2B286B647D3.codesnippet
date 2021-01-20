@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccplaceholder</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSAttributedString *attrString1 = [[NSAttributedString alloc] initWithString:_field1.placeholder attributes:
+@{NSForegroundColorAttributeName:Label_Color_C}];
+_field1.attributedPlaceholder = attrString1;
+
+NSAttributedString *attrString2 = [[NSAttributedString alloc] initWithString:_field2.placeholder attributes:
+@{NSForegroundColorAttributeName:Label_Color_C}];
+_field2.attributedPlaceholder = attrString2;
+
+NSAttributedString *attrString3 = [[NSAttributedString alloc] initWithString:_field3.placeholder attributes:
+@{NSForegroundColorAttributeName:Label_Color_C}];
+_field3.attributedPlaceholder = attrString3;</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>8B2AE972-665C-4383-9266-A2B286B647D3</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>设置field的placeholder颜色</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

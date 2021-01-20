@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccuploadimage</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>[SVProgressHUD showWithStatus:@"上传中"];
+    
+    [SOAPUrlSession SOAPDataWithMethod:@"UpLoadImg" idCode:[UserInformation sharedInstance].EnCode imageKey:@"HeadIcon" imageData:imageData success:^(id responseObject) {
+        
+        //-------------------------------更新数据源-------------------------------
+        NSDictionary *responseDic = responseObject;
+        NSLog(@"%@ ----- %@",responseDic[@"Code"],responseDic[@"Message"]);
+        
+        //返回的Code字段：200-成功，300-失败，400-无数据，500-内部服务异常
+        NSString *responseCode = [NSString stringWithFormat:@"%@",responseObject[@"Code"]];
+        
+        if ([responseCode isEqualToString:@"200"]) {
+            
+            NSDictionary *dataDic = responseObject[@"Data"];
+            
+            imagePath = dataDic[@"FilePath"];
+        }
+            
+        [SVProgressHUD dismiss];
+    } failure:^(NSError *error) {
+        SVP_ERROR(@"请求失败")
+        
+    }];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>8D907BAC-ED7C-41A1-9BAD-8071CFAF4043</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>上传图片</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cclabel</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>@property (weak, nonatomic) IBOutlet UILabel *label1;       // 
+@property (weak, nonatomic) IBOutlet UILabel *label2;       // 
+@property (weak, nonatomic) IBOutlet UILabel *label3;       // 
+@property (weak, nonatomic) IBOutlet UILabel *label4;       // 
+@property (weak, nonatomic) IBOutlet UILabel *label5;       // 
+@property (weak, nonatomic) IBOutlet UILabel *label6;       // 
+@property (weak, nonatomic) IBOutlet UILabel *label7;       // 
+@property (weak, nonatomic) IBOutlet UILabel *label8;       // 
+@property (weak, nonatomic) IBOutlet UILabel *label9;       // 
+@property (weak, nonatomic) IBOutlet UILabel *label10;      // 
+@property (weak, nonatomic) IBOutlet UILabel *label11;      // 
+@property (weak, nonatomic) IBOutlet UILabel *label12;      // 
+@property (weak, nonatomic) IBOutlet UILabel *label13;      // 
+@property (weak, nonatomic) IBOutlet UILabel *label14;      // </string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>EED3FCC6-3362-429E-A110-D98E7A29BF8A</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>xib创建很多歌label</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

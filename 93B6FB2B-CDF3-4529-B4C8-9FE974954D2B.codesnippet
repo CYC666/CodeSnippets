@@ -1,0 +1,80 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccflowlayout</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//
+//  TopBarLayout.h
+//  LOLADFNeverGiveUp
+//
+//  Created by 曹老师 on 2018/12/17.
+//  Copyright © 2018 众利创投. All rights reserved.
+//
+
+#import &lt;UIKit/UIKit.h&gt;
+
+NS_ASSUME_NONNULL_BEGIN
+
+
+@protocol TopBarLayoutDelegate
+
+@optional
+// 用协议传回 item 的内容,用于计算 item 宽度
+- (NSString *)collectionViewItemSizeWithIndexPath:(NSIndexPath *)indexPath;
+// 用协议传回 headerSize 的 size
+- (CGSize)collectionViewDynamicHeaderSizeWithIndexPath:(NSIndexPath *)indexPath;
+// 用协议传回 footerSize 的 size
+- (CGSize)collectionViewDynamicFooterSizeWithIndexPath:(NSIndexPath *)indexPath;
+
+
+@end
+
+@interface TopBarLayout : UICollectionViewFlowLayout
+
+
+// item 的行距（默认4.0）
+@property (nonatomic, assign) CGFloat lineSpacing;
+// item 的间距 （默认4.0）
+@property (nonatomic, assign) CGFloat interitemSpacing;
+// header 高度（默认0.0）
+@property (nonatomic, assign) CGFloat headerViewHeight;
+// footer 高度（默认0.0）
+@property (nonatomic, assign) CGFloat footerViewHeight;
+// item 高度 (默认30)
+@property (nonatomic, assign) CGFloat itemHeight;
+// footer 边距缩进（默认UIEdgeInsetsZero）
+@property (nonatomic, assign) UIEdgeInsets footerInset;
+// header 边距缩进（默认UIEdgeInsetsZero）
+@property (nonatomic, assign) UIEdgeInsets headerInset;
+// item 边距缩进（默认UIEdgeInsetsZero）
+@property (nonatomic, assign) UIEdgeInsets itemInset;
+// item Label Font（默认系统字体15）
+@property (nonatomic, copy) UIFont *labelFont;
+
+@property (nonatomic, weak) id&lt;TopBarLayoutDelegate&gt; delegate;
+
+
+
+
+@end
+
+NS_ASSUME_NONNULL_END
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>93B6FB2B-CDF3-4529-B4C8-9FE974954D2B</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>FlowLayout .h 文件内容</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

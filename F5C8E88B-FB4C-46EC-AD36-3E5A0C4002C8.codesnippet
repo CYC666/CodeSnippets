@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccnet</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>    NSString *method = [NSString stringWithFormat:@"&lt;#name#&gt;"];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         [UserInformation sharedInstance].UserId,@"UserId",
+                         @"",@"ProductId",
+                         nil];
+    
+    [SVProgressHUD showWithStatus:@"加载中"];
+    [SOAPUrlSession SOAPDataWithMethod:method parameter:dic success:^(id responseObject) {
+        
+
+        NSNumber *responseCode = responseObject[@"Code"];
+        
+        if ([responseCode isEqualToNumber:@200]) {
+            
+            
+            SVP_SUCCESS(responseObject[@"Message"])
+            
+        } else {
+            
+            SVP_ERROR(responseObject[@"Message"])
+                
+            
+            
+        }
+    } failure:^(NSError *error) {
+        
+        SVP_ERROR(@"网络异常：连接服务器失败")
+        
+    }];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>F5C8E88B-FB4C-46EC-AD36-3E5A0C4002C8</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>添加网络请求</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

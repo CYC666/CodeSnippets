@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccpath</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>UIView *line= [[UIView alloc] initWithFrame:CGRectMake(0, (view.c_height - kBorderWidth)/2.0, view.c_width, kBorderWidth)];
+            [view addSubview:line];
+            
+            // 画虚线
+            CAShapeLayer *shapeLayer = [CAShapeLayer layer];
+            [shapeLayer setBounds:line.bounds];
+            [shapeLayer setPosition:CGPointMake(CGRectGetWidth(line.frame) / 2, CGRectGetHeight(line.frame))];
+            [shapeLayer setFillColor:[UIColor clearColor].CGColor];
+            //  设置虚线颜色为blackColor
+            [shapeLayer setStrokeColor:Content_Color.CGColor];
+            //  设置虚线宽度
+            [shapeLayer setLineWidth:CGRectGetHeight(line.frame)];
+            [shapeLayer setLineJoin:kCALineJoinRound];
+            //  设置线宽，线间距
+            [shapeLayer setLineDashPattern:[NSArray arrayWithObjects:[NSNumber numberWithInt:5], [NSNumber numberWithInt:5], nil]];
+            //  设置路径
+            CGMutablePathRef path = CGPathCreateMutable();
+            CGPathMoveToPoint(path, NULL, 0, 0);
+            CGPathAddLineToPoint(path, NULL,CGRectGetWidth(line.frame), 0);
+            [shapeLayer setPath:path];
+            CGPathRelease(path);
+            //  把绘制好的虚线添加上来
+            [line.layer addSublayer:shapeLayer];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>43ED3AB2-71EE-4079-A779-C24AA666CC5D</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>画虚线</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

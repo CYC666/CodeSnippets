@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cccolor</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>/**&lt; 初始化渐变层 */
+CAGradientLayer *gradientColorLayer2 = [CAGradientLayer layer];
+gradientColorLayer2.frame = _button3.bounds;
+[_button3.layer insertSublayer:gradientColorLayer2 atIndex:0];
+gradientColorLayer2.colors = @[(__bridge id)Button_Color_Left.CGColor,
+(__bridge id)Button_Color_Right.CGColor];
+gradientColorLayer2.locations  = @[@(0), @(1.0)];
+gradientColorLayer2.startPoint = CGPointMake(0, 0);
+gradientColorLayer2.endPoint   = CGPointMake(1, 0);</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>3EC59651-F431-4692-AAAC-A964F7EFD2C7</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>颜色渐变</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

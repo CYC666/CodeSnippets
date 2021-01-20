@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccnewlist</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+@property (strong, nonatomic) UITableView *listTableView;
+@property (strong, nonatomic) NSMutableArray *dataArray;
+@property (assign, nonatomic) NSInteger currentPage;
+
+@end
+
+@implementation IntegralExchangeListController
+
+#pragma mark ========================================生命周期========================================
+- (void)viewDidLoad {
+    [super viewDidLoad];
+    
+    self.title = @"&lt;#title#&gt;";
+    self.view.backgroundColor = WhiteColor;
+    _dataArray = [NSMutableArray array];
+    
+    // 表视图
+    _listTableView = [CYC666 setTableViewRowHeight:45 ctrl:self cellID:@"GetMonetListCell" headerBlock:^{
+        [self loadListAction:NO];
+    } footerBlock:^{
+        [self loadListAction:YES];
+    }];
+    
+    //    [self loadListAction:NO];
+    
+}
+
+#pragma mark ========================================动作响应=============================================
+
+
+#pragma mark ========================================网络请求=============================================
+
+#pragma mark - 获取列表
+- (void)loadListAction:(BOOL)isfooter {
+    
+    if (isfooter) {
+        _currentPage ++;
+    } else {
+        _currentPage = 1;
+        [_dataArray removeAllObjects];
+    }
+    
+    NSString *PageIndex =[NSString stringWithFormat:@"%ld", (long)_currentPage];
+    [CYC666 setListNetWork:_listTableView UserId:kUserInfo.UserId method:@"GetForumReleaseList" PageIndex:PageIndex successBlock:^(id object) {
+                  
+                  
+                  NSArray *list = object[@"Data"][@"rows"];
+                  for (NSDictionary *dic in list) {
+                      NSObject *model = [NSObject mj_objectWithKeyValues:dic];
+                      [_dataArray addObject:model];
+                  }
+                  
+                  
+    } failureBlock:^(id object) {
+                  
+    }];
+}
+
+
+#pragma mark ========================================代理方法=============================================
+
+#pragma mark - 表视图代理方法
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    
+//    return dataArray.count;
+    return 20;
+    
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    IntegralExchangeListCell *cell = [tableView dequeueReusableCellWithIdentifier:@"IntegralExchangeListCell"
+                                                     forIndexPath:indexPath];
+    
+    return cell;
+    
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    [tableView deselectRowAtIndexPath:indexPath animated:YES];
+    
+    
+}
+
+
+#pragma mark ========================================通知================================================
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>DBD58806-8794-4773-A868-0875D971DD51</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>新的列表控制器</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

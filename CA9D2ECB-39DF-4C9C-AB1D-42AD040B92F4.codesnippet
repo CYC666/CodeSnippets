@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cctipview</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>@interface InvoiceShouldKnowView ()
+
+@property (strong, nonatomic) UIButton *button1;    // 返回
+@property (strong, nonatomic) UIView *view1;        // 承载
+
+@end
+
+@implementation InvoiceShouldKnowView
+
+
+
+#pragma mark ========================================生命周期========================================
++ (instancetype)new {
+    
+    InvoiceShouldKnowView *view = [[InvoiceShouldKnowView alloc] initWithFrame:[UIScreen mainScreen].bounds];
+    [view creatUIAction];
+    [[UIApplication sharedApplication].keyWindow addSubview:view];
+    
+    return view;
+}
+
+#pragma mark - 创建UI
+- (void)creatUIAction {
+    
+    // 返回按钮
+    _button1 = [[UIButton alloc] initWithFrame:self.bounds];
+    _button1.backgroundColor = cRGB(0, 0, 0, 0.5);
+    _button1.alpha = 0;
+    cBtnSelector(_button1, backAction)
+    [self addSubview:_button1];
+    
+    CGFloat height = 0.0;
+    
+    // 主视图
+    UIView *view = [[UIView alloc] initWithFrame:CGRectMake(0, 0, self.c_width, 0)];
+    view.backgroundColor = cWhiteColor;
+    [self addSubview:view];
+    _view1 = view;
+    
+    
+    height = 600;
+    _view1.frame = CGRectMake(0, self.c_height - height + [UIScreen mainScreen].bounds.size.height, self.c_width, height);
+    
+    
+    // 出现
+    [UIView animateWithDuration:.25 animations:^{
+        _button1.alpha = 1;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.25 animations:^{
+            _view1.transform = CGAffineTransformMakeTranslation(0, -cScreenHeight);
+        }];
+    }];
+    
+}
+
+
+
+
+
+#pragma mark ========================================动作响应=============================================
+
+#pragma mark - 退出
+- (void)backAction {
+    
+    // 消失
+    [UIView animateWithDuration:.25 animations:^{
+        _view1.transform = CGAffineTransformMakeTranslation(0, 0);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.25 animations:^{
+            _button1.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+    }];
+    
+}
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>CA9D2ECB-39DF-4C9C-AB1D-42AD040B92F4</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>纯代码TipView</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

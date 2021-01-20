@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccpath</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>{
+            // Test 画曲线
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(kSpaceSize, height + kSpaceSize, cScreenWidth - kSpaceSize*2, 300)];
+            view.backgroundColor = Content_Color;
+            [scrollView addSubview:view];
+            height = view.c_bottom;
+            
+            // 渐变色
+            CAGradientLayer *granLayer = [[CAGradientLayer alloc] init];
+            granLayer.startPoint = CGPointMake(0, 0);
+            granLayer.endPoint = CGPointMake(0, 1);
+            granLayer.locations = @[@0.0, @1.0];
+            granLayer.frame = view.bounds;
+            granLayer.colors = @[(__bridge id)[UIColor orangeColor].CGColor, (__bridge id)cWhiteColor.CGColor];
+            [view.layer addSublayer:granLayer];
+
+            // 填充色
+            CAShapeLayer *maskLayer = [[CAShapeLayer alloc] init];
+            maskLayer.frame = view.bounds;
+            maskLayer.fillColor = [UIColor yellowColor].CGColor;
+            granLayer.mask = maskLayer;
+            
+            // 折线
+            CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
+            shapeLayer.frame = view.bounds;
+            shapeLayer.lineWidth = 1;
+            shapeLayer.lineCap = @"round";
+            shapeLayer.fillColor = cClearColor.CGColor;
+            shapeLayer.strokeColor = [UIColor orangeColor].CGColor;
+            [view.layer addSublayer:shapeLayer];
+            
+            // 配置路径
+            UIBezierPath *path = [[UIBezierPath alloc] init];
+            [path moveToPoint:CGPointMake(0, view.c_height)];
+            double BW = view.c_width/10.0;
+            for (NSInteger i = 0; i &lt; 10; i++) {
+                
+                CGPoint point = CGPointMake(BW*i, view.c_height * (arc4random() % 10)/10.0);
+                [path addLineToPoint:point];
+            }
+            [path addLineToPoint:CGPointMake(view.c_width, view.c_height * (arc4random() % 10)/10.0)];
+            shapeLayer.path = path.CGPath;
+            
+            [path addLineToPoint:CGPointMake(view.c_width, view.c_height)];
+            [path addLineToPoint:CGPointMake(0, view.c_height)];
+            maskLayer.path = path.CGPath;
+        }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>774C0D5D-DE34-4E0A-B409-244EDF90DBD1</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>绘画</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

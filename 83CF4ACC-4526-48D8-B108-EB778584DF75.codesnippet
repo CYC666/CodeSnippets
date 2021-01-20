@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccmm</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//（1）、视图将要出现的时候,禁用MMDrawCtrls
+- (void)viewWillAppear:(BOOL)animated{
+    [super viewWillAppear:YES];
+    //获取根视图控制器
+    MMDrawerController *drawCtrl= (MMDrawerController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    //设置一下打开的区域
+    [drawCtrl setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeNone];
+}
+//（2）、视图将要消失的时候,还原一下
+- (void)viewWillDisappear:(BOOL)animated{
+    [super viewWillDisappear:animated];
+    MMDrawerController *drawCtrl= (MMDrawerController *)[UIApplication sharedApplication].keyWindow.rootViewController;
+    //设置一下打开的区域
+    [drawCtrl setOpenDrawerGestureModeMask:MMOpenDrawerGestureModeAll];
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>83CF4ACC-4526-48D8-B108-EB778584DF75</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>控制MM的侧滑效果</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

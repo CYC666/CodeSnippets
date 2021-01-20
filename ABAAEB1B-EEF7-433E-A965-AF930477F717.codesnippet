@@ -1,0 +1,150 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cctipview</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>+ (instancetype)new {
+    
+    CTipView *view = [[[NSBundle mainBundle] loadNibNamed:@"&lt;#name#&gt;" owner:nil options:nil] firstObject];
+    view.frame = [UIScreen mainScreen].bounds;
+    [[UIApplication sharedApplication].keyWindow addSubview:view];
+    
+    return view;
+}
+
+- (void)awakeFromNib {
+    
+    [super awakeFromNib];
+    
+    _label1.textColor = Publie_Color;
+    _label1.font = PingFangSC(15);
+    _label2.textColor = cLabColA;
+    _label2.font = PingFangSC(15);
+    _button2.titleLabel.font = _button3.titleLabel.font = _button4.titleLabel.font = PingFangSC(12);
+    _button2.backgroundColor = _button4.backgroundColor = Publie_Color;
+    _button3.backgroundColor = Label_Color_C;
+    
+    
+    self.button1.backgroundColor = CRGB(0, 0, 0, 0.3);
+    self.button1.alpha = 0;
+    self.label1.superview.transform = CGAffineTransformMakeTranslation(0, [UIScreen mainScreen].bounds.size.height);
+    
+    [_button1 addTarget:self action:@selector(button1Action:) forControlEvents:UIControlEventTouchUpInside];
+    [_button2 addTarget:self action:@selector(button2Action:) forControlEvents:UIControlEventTouchUpInside];
+    [_button3 addTarget:self action:@selector(button3Action:) forControlEvents:UIControlEventTouchUpInside];
+    [_button4 addTarget:self action:@selector(button4Action:) forControlEvents:UIControlEventTouchUpInside];
+    
+    
+}
+
+- (void)setModel:(VersionModel *)model {
+    
+    _model = model;
+    
+    // 版本号
+    if (![model.is_break isEqualToString:@"1"]) {
+        _label1.text = [NSString stringWithFormat:@"V%@", model.version];
+        _button1.userInteractionEnabled = NO;
+        _button3.superview.hidden = YES;
+    } else {
+        _label1.text = [NSString stringWithFormat:@"v%@", model.version];
+        _button1.userInteractionEnabled = YES;
+        _button3.superview.hidden = NO;
+    }
+    
+    // 更新内容
+    NSString *msg = [NSString stringWithFormat:@"%@", model.content];
+    NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:msg];
+    NSMutableParagraphStyle *paragrah = [[NSMutableParagraphStyle alloc] init];
+    paragrah.lineSpacing = 6;   // 行间距
+    paragrah.paragraphSpacing = 6; // 段落间距
+    NSRange range = NSMakeRange(0, string.length);
+    [string addAttribute:NSParagraphStyleAttributeName value:paragrah range:range];
+    _label2.attributedText = string;
+    
+    
+    // 出现
+    [UIView animateWithDuration:.25 animations:^{
+        self.button1.alpha = 1;
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.25 animations:^{
+            self.label1.superview.transform = CGAffineTransformMakeTranslation(0, 0);
+        }];
+    }];
+}
+
+
+#pragma mark - 退出
+- (void)backButtonAction {
+    
+    [UIView animateWithDuration:.25 animations:^{
+        self.label1.superview.transform = CGAffineTransformMakeTranslation(0, [UIScreen mainScreen].bounds.size.height);
+    } completion:^(BOOL finished) {
+        [UIView animateWithDuration:.25 animations:^{
+            self.button1.alpha = 0;
+        } completion:^(BOOL finished) {
+            [self removeFromSuperview];
+        }];
+        
+    }];
+    
+}
+
+#pragma mark - 返回
+- (void)button1Action:(UIButton *)button {
+    
+    [self backButtonAction];
+    
+}
+
+#pragma mark - 强更
+- (void)button2Action:(UIButton *)button {
+    
+    [self backButtonAction];
+    
+    if (_selectBlock) {
+        _selectBlock(0);
+    }
+    
+}
+
+#pragma mark - 下次再说
+- (void)button3Action:(UIButton *)button {
+    
+    [self backButtonAction];
+    
+    if (_selectBlock) {
+        _selectBlock(1);
+    }
+}
+
+#pragma mark - 立即更新
+- (void)button4Action:(UIButton *)button {
+    
+    [self backButtonAction];
+    
+    if (_selectBlock) {
+        _selectBlock(2);
+    }
+}
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>ABAAEB1B-EEF7-433E-A965-AF930477F717</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>xib提示窗</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

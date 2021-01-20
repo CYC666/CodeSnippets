@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccalert</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 弹框提示是否执行
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:nil
+                                                                   message:@"&lt;##&gt;"
+                                                            preferredStyle:UIAlertControllerStyleActionSheet];
+    
+UIAlertAction *cancel = [UIAlertAction actionWithTitle:@"取消"
+                                                 style:UIAlertActionStyleCancel
+                                               handler:^(UIAlertAction * _Nonnull action) {
+                                                   
+                                               }];
+[cancel setValue:[UIColor redColor] forKey:@"_titleTextColor"];
+[alert addAction:cancel];   
+[alert addAction:[UIAlertAction actionWithTitle:@"确定"
+                                          style:UIAlertActionStyleDefault
+                                        handler:^(UIAlertAction * _Nonnull action) {
+                                                 
+                                                 
+                                                 
+    }]];
+
+    [self presentViewController:alert animated:YES completion:nil];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>8365E65A-FD57-4C11-AD91-DB0A278840E3</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>弹窗</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

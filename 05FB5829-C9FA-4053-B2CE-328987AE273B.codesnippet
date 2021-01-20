@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccp</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>    // MARK:======================================生命周期========================================
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.titleLabel?.text = ""
+        self.view.backgroundColor = kBGColor
+        self.creatUIAction()
+    }
+    
+    func creatUIAction() {
+        
+        let scrollView = UIScrollView.init(frame: CGRect.init(x: 0, y: kNavHeight, width: kScreenWidth, height: kScreenHeight - kNavHeight))
+        scrollView.alwaysBounceVertical = true
+        scrollView.alwaysBounceHorizontal = false
+        self.view.addSubview(scrollView)
+        
+        var height = CGFloat(0.0)
+
+        
+        
+        scrollView.contentSize = CGSize.init(width: CGFloat(kScreenWidth), height: CGFloat(height + 50))
+        
+    }
+    
+    
+    // MARK:======================================点击响应========================================
+    
+    
+    
+    // MARK:======================================网络请求========================================
+    
+    
+    
+    // MARK:======================================代理方法========================================
+    
+    
+    
+    
+    
+    
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>05FB5829-C9FA-4053-B2CE-328987AE273B</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>控制器格式化</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

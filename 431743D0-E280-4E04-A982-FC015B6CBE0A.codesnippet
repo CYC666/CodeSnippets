@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccpost</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSDictionary *dic = @{@"email" : _field1.text,
+                          @"password" : _field2.text
+    };
+    MBPS(self.view)
+    [CNetwork POST:dic method:@"&lt;#name#&gt;" success:^(id  _Nonnull obj) {
+
+        MBPH(self.view)
+        NSString *code = [NSString stringWithFormat:@"%@", obj[@"code"]];
+        if ([code isEqualToString:@"0"]) {
+
+            
+        }
+
+    } failse:^(id  _Nonnull obj) {
+        MBPH(self.view)
+    }];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>431743D0-E280-4E04-A982-FC015B6CBE0A</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>资管POST请求</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

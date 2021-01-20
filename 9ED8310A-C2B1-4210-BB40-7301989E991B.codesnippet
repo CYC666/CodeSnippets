@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ssgravity</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>animator = UIDynamicAnimator(referenceView: self.view)
+        let gravity = UIGravityBehavior(items: [self.gravity,self.push,self.attachment])
+        animator.addBehavior(gravity)
+        
+        collision = UICollisionBehavior(items: [self.push, self.gravity, self.attachment])
+        collision.translatesReferenceBoundsIntoBoundary = true
+        animator.addBehavior(collision)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>9ED8310A-C2B1-4210-BB40-7301989E991B</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>swift 重力</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

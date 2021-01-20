@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccfield</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#pragma mark - 检测field非空
+- (void)fieldAction {
+    
+    if (kStringIsEmpty(_field1.text) || kStringIsEmpty(_field2.text) || kStringIsEmpty(_field3.text) || kStringIsEmpty(_field4.text) ) {
+        
+        _button2.alpha = 0.5;
+        _button2.userInteractionEnabled = NO;
+    } else {
+        
+        _button2.alpha = 1;
+        _button2.userInteractionEnabled = YES;
+    }
+    
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>906FEE46-B8E0-4BCC-959C-DF6312F7F8E0</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>检测field非空</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccview</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let view1 = UIView.init(frame: CGRect.init(x: &lt;#value#&gt;, y: &lt;#value#&gt;, width: &lt;#value#&gt;, height: &lt;#value#&gt;))
+view1.backgroundColor = .white
+view1.c_radius(radius:kRadiusSize)
+scrollView.addSubview(view1)
+height = view1.c_bottom()</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>7834A0EB-4BFA-4108-9B6B-E04436FF2759</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>view</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

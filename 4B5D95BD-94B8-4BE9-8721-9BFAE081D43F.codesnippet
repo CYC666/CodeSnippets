@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccatt</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let str = NSMutableAttributedString.init(string: " ")
+str.addAttribute(.foregroundColor, value: UIColor.white, range: NSRange.init(location: 0, length: str.length))
+let att = NSTextAttachment.init()
+att.image = UIImage.init(named: "")
+att.bounds = CGRect.init(x: 0, y: -3, width: 15, height: 15)
+str.insert(NSAttributedString.init(attachment: att), at: 0)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>4B5D95BD-94B8-4BE9-8721-9BFAE081D43F</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>图文混排</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

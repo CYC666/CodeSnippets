@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cctextview</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>            let textView = UITextView.init(frame: .init(x: kSpaceSize, y: height + kSpaceSize, width: kScreenWidth - kSpaceSize*2, height: 90))
+            textView.font = kRFont(16)
+            textView.textColor = kLabelColor1
+            textView.delegate = self
+            scrollView.addSubview(textView)
+            height = textView.c_bottom()
+            
+            let lab = UILabel.init(frame: CGRect.init(x: 5, y: 5, width: textView.c_width() - 5*2, height: 20))
+            lab.textColor = kLabelColor3
+            lab.textAlignment = .left
+            lab.font = kRFont(15)
+            lab.text = "请输入您要反馈/投诉的的问题"
+            textView.addSubview(lab)
+            self.label1 = lab</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>06D30416-5AAC-4BA3-8152-6D52EBCCEDB9</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift textview</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

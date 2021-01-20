@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccruntime</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 获取DSAView类中所有成员变量的名字和类型
+unsigned int outCount = 0;
+Ivar *ivars = class_copyIvarList([DSAView class], &amp;outCount);
+
+// 遍历所有成员变量
+for (int i = 0; i &lt; outCount; i++) {
+    // 取出i位置对应的成员变量
+    Ivar ivar = ivars[i];
+    const char *name = ivar_getName(ivar);
+    const char *type = ivar_getTypeEncoding(ivar);
+    NSLog(@"成员变量名：%s 成员变量类型：%s",name,type);
+}
+// 注意释放内存！
+free(ivars);</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>A016A073-389D-441C-8206-A1D6A3E3F0E8</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>获取类中所有成员变量的名字和类型</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

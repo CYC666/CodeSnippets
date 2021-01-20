@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cctuntime</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 利用runtime来替换展现弹出框的方法
+- (void)runtimeReplaceAlert
+{
+    static dispatch_once_t onceToken;
+    dispatch_once(&amp;onceToken, ^{
+        Method presentM = class_getInstanceMethod(self.class, @selector(presentViewController:animated:completion:));
+        Method presentSwizzlingM = class_getInstanceMethod(self.class, @selector(ox_presentViewController:animated:completion:));
+        // 交换方法实现
+        method_exchangeImplementations(presentM, presentSwizzlingM);
+    });
+}
+
+- (void)ox_presentViewController:(UIViewController *)viewControllerToPresent animated:(BOOL)flag completion:(void (^)(void))completion {
+
+    if ([viewControllerToPresent isKindOfClass:[UIAlertController class]]) {
+        // 换图标时的提示框的title和message都是nil，由此可特殊处理
+        UIAlertController *alertController = (UIAlertController *)viewControllerToPresent;
+        if (alertController.title == nil &amp;&amp; alertController.message == nil) { // 是换图标的提示
+            return;
+        } else {// 其他提示还是正常处理
+            [self ox_presentViewController:viewControllerToPresent animated:flag completion:completion];
+            return;
+        }
+    }
+
+    [self ox_presentViewController:viewControllerToPresent animated:flag completion:completion];
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>D07E848F-C157-4E27-A77F-C52D201E8245</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>runtime 替换方法</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

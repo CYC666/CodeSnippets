@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccget</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string> NSDictionary *dic = @{@"act" : @"b2b_member_goods",
+                       @"op" : @"view",
+                       @"id" : _goodsId,
+                       @"key" : [MallManager manager].scstToken
+ };
+ MBPS(self.view)
+ [MallNetManager JAVA_GET:dic method:@"" enable:YES success:^(id  _Nonnull obj) {
+     
+     NSString *code = [NSString stringWithFormat:@"%@", obj[@"code"]];
+     
+     if ([code isEqualToString:@"200"]) {
+         
+         NSArray *list = obj[@"datas"][@"class_list"];
+         
+         
+     } else {
+         
+         [self.view makeToast:[NSString stringWithFormat:@"%@", obj[@"msg"]]];
+     }
+     
+     MBPH(self.view)
+     
+     
+ } failse:^(id  _Nonnull obj) {
+     MBPH(self.view)
+     [self.view makeToast:RCDLocalizedString(@"network_can_not_use_please_check")];
+ }];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>0FA3786F-2DB5-41EA-BE27-F36D466821CB</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>CWC商城GET请求</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

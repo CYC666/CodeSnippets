@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccpost</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSDictionary *dic = @{@"page" : @(_currentPage),
+                          @"pageSize" : @(20)
+    };
+    MBPS(self.view)
+    [CNetwork POST:dic method:@"message/findMessage" success:^(id  _Nonnull obj) {
+        
+        MBPH(self.view)
+        NSString *code = [NSString stringWithFormat:@"%@", obj[@"code"]];
+        NSArray *list;
+        if ([code isEqualToString:@"200"]) {
+            
+            list = obj[@"result"][@"list"];
+            for (NSDictionary *dic in list) {
+                MessageModel *model = [MessageModel mj_objectWithKeyValues:dic];
+                [_dataArray addObject:model];
+            }
+        }
+        
+        if (list.count &gt; 0) {
+            [_listTableView.mj_footer endRefreshing];
+        } else {
+            [_listTableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        [_listTableView.mj_header endRefreshing];
+        [CNetwork setNoDateView:_listTableView dataList:_dataArray];
+        
+    } failse:^(id  _Nonnull obj) {
+        MBPH(self.view)
+        [CNetwork setNoDateView:_listTableView dataList:_dataArray];
+    }];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>E4501337-25FE-4D07-B3AE-BF4121E8A647</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>网络获取列表请求</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

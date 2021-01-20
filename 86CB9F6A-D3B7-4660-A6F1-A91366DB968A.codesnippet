@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccsize</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSMutableParagraphStyle *paragrah = [[NSMutableParagraphStyle alloc] init];
+            paragrah.lineSpacing = 3;   // 行间距
+            paragrah.paragraphSpacing = 6; // 段落间距
+            
+            CGSize size = [text boundingRectWithSize:CGSizeMake(SCREEN_WIDTH - 15*2, MAXFLOAT)
+                                             options:NSStringDrawingUsesLineFragmentOrigin
+                                          attributes:@{NSFontAttributeName:PingFangSC(14), NSParagraphStyleAttributeName:paragrah}
+                                             context:nil].size;
+            
+            NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
+            NSRange range = NSMakeRange(0, string.length);
+            [string addAttribute:NSParagraphStyleAttributeName value:paragrah range:range];
+            [string addAttribute:NSForegroundColorAttributeName value:Label_Color_A range:NSMakeRange(0, text.length)];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>86CB9F6A-D3B7-4660-A6F1-A91366DB968A</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>计算段落行间距</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

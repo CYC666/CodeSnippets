@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cccollectionview</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 集合视图
+    UICollectionViewFlowLayout *layout = [[UICollectionViewFlowLayout alloc] init];
+    layout.itemSize = CGSizeMake(kScreenWidth * 0.25, kScreenWidth * 0.25);
+    layout.minimumLineSpacing = 0;
+    layout.minimumInteritemSpacing = 0;
+    layout.scrollDirection = UICollectionViewScrollDirectionHorizontal;
+    
+    _listCollectionView = [[UICollectionView alloc] initWithFrame:CGRectMake(0, Nav_Height, kScreenWidth, kScreenHeight - Nav_Height)
+                                             collectionViewLayout:layout];
+    _listCollectionView.backgroundColor = [UIColor clearColor];
+    [_listCollectionView registerNib:[UINib nibWithNibName:@"ImageSelectViewCell" bundle:[NSBundle mainBundle]]
+          forCellWithReuseIdentifier:@"ImageSelectViewCell"];
+    [_listCollectionView registerNib:[UINib nibWithNibName:@"StoreDetialHeaderView" bundle:[NSBundle mainBundle]] forSupplementaryViewOfKind:UICollectionElementKindSectionHeader withReuseIdentifier:@"StoreDetialHeaderView"];
+    _listCollectionView.delegate = self;
+    _listCollectionView.dataSource = self;
+    [self.view addSubview:_listCollectionView];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>C482114E-DAFF-47A2-B040-BC2F47D9450F</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>集合视图</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cczhuge</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 诸葛数据统计
+    NSMutableDictionary *properties = [NSMutableDictionary dictionary];
+properties[@"&lt;#action#&gt;"] = @"&lt;#name#&gt;";
+properties[@"&lt;#action#&gt;"] = @"&lt;#name#&gt;";
+[[Zhuge sharedInstance] track:@"&lt;#action#&gt;" properties:properties];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>DD3A86EA-250F-4CFD-B0FF-94E74A175C25</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>诸葛统计</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

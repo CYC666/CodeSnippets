@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ssattach</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>animator = UIDynamicAnimator(referenceView: self.view)
+        let anchorPoint = CGPoint(x: self.attachment.center.x, y: self.attachment.center.y)
+        attachmentBehavior = UIAttachmentBehavior(item: self.attachment, attachedToAnchor: anchorPoint)
+        attachmentBehavior!.frequency = 0.5
+        attachmentBehavior!.damping = 2
+        attachmentBehavior!.length = 20
+        animator.addBehavior(attachmentBehavior!)
+        collision = UICollisionBehavior(items: [self.push, self.gravity, self.attachment])
+        collision.translatesReferenceBoundsIntoBoundary = true
+        animator.addBehavior(collision) </string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>72A8D720-AB9D-4B0C-9E71-4533F9CF4401</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>swift 吸附</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

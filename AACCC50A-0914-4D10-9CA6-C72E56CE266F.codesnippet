@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cc3dtouch</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#pragma mark - 3D Touch
+// 注册
+- (void)register3DCellAction:(UITableViewCell *)cell {
+    
+    //注册3D Touch
+    /**
+     从iOS9开始，我们可以通过这个类来判断运行程序对应的设备是否支持3D Touch功能。
+     UIForceTouchCapabilityUnknown = 0,     //未知
+     UIForceTouchCapabilityUnavailable = 1, //不可用
+     UIForceTouchCapabilityAvailable = 2    //可用
+     */
+    if ([self respondsToSelector:@selector(traitCollection)]) {
+        
+        if ([self.traitCollection respondsToSelector:@selector(forceTouchCapability)]) {
+            
+            if (self.traitCollection.forceTouchCapability == UIForceTouchCapabilityAvailable) {
+                
+                [self registerForPreviewingWithDelegate:(id)self sourceView:cell];
+            }
+        }
+    }
+    
+}
+
+
+#pragma mark - 3DTouch代理方法
+// 预览
+- (nullable UIViewController *)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext viewControllerForLocation:(CGPoint)location NS_AVAILABLE_IOS(9_0) {
+    
+    WebViewComtroller *ctrl = [[WebViewComtroller alloc] init];
+    ctrl.url = @"https://xin.baidu.com";
+    ctrl.title = @"公司介绍";
+    
+    return ctrl;
+}
+
+// 跳转
+- (void)previewingContext:(id &lt;UIViewControllerPreviewing&gt;)previewingContext commitViewController:(UIViewController *)viewControllerToCommit NS_AVAILABLE_IOS(9_0) {
+    
+    [self showViewController:viewControllerToCommit sender:self];
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>AACCC50A-0914-4D10-9CA6-C72E56CE266F</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>3D Touch实现</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

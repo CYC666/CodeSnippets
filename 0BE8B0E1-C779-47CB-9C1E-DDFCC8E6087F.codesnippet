@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccbutton</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let btn = UIButton.init(frame: CGRect.init(x: &lt;#value#&gt;, y: &lt;#value#&gt;, width: &lt;#value#&gt;, height: &lt;#value#&gt;))
+btn.setTitle("", for: .normal)
+btn.setTitleColor(.white, for: .normal)
+btn.titleLabel?.font = kRFont(12)
+btn.backgroundColor = .clear
+btn.c_highLight()
+btn.addTarget(self, action: #selector(incomeDetailAction), for: .touchUpInside)
+view.addSubview(btn)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>0BE8B0E1-C779-47CB-9C1E-DDFCC8E6087F</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>button</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

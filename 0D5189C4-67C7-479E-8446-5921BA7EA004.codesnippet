@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccwk</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//创建网页配置对象
+WKWebViewConfiguration *config = [[WKWebViewConfiguration alloc] init];
+
+// 创建设置对象
+WKPreferences *preference = [[WKPreferences alloc]init];
+//最小字体大小 当将javaScriptEnabled属性设置为NO时，可以看到明显的效果
+preference.minimumFontSize = 0;
+//设置是否支持javaScript 默认是支持的
+preference.javaScriptEnabled = YES;
+// 在iOS上默认为NO，表示是否允许不经过用户交互由javaScript自动打开窗口
+preference.javaScriptCanOpenWindowsAutomatically = YES;
+config.preferences = preference;
+
+// 是使用h5的视频播放器在线播放, 还是使用原生播放器全屏播放
+config.allowsInlineMediaPlayback = YES;
+//设置视频是否需要用户手动播放  设置为NO则会允许自动播放
+config.requiresUserActionForMediaPlayback = YES;
+//设置是否允许画中画技术 在特定设备上有效
+config.allowsPictureInPictureMediaPlayback = YES;
+
+//    //设置请求的User-Agent信息中应用程序名称 iOS9后可用
+//    config.applicationNameForUserAgent = @"ChinaDailyForiPad";
+//    //自定义的WKScriptMessageHandler 是为了解决内存不释放的问题
+//    WeakWebViewScriptMessageDelegate *weakScriptMessageDelegate = [[WeakWebViewScriptMessageDelegate alloc] initWithDelegate:self];
+//    //这个类主要用来做native与JavaScript的交互管理
+WKUserContentController * wkUController = [[WKUserContentController alloc] init];
+//注册一个name为jsToOcNoPrams的js方法
+[wkUController addScriptMessageHandler:self  name:@"toScanCode"];
+//    [wkUController addScriptMessageHandler:weakScriptMessageDelegate  name:@"jsToOcWithPrams"];
+config.userContentController = wkUController;
+
+WKWebView *webView = [[WKWebView alloc] initWithFrame:[UIScreen mainScreen].bounds configuration:config];
+
+//      // UI代理
+//      _webView.UIDelegate = self;
+//      // 导航代理
+//      _webView.navigationDelegate = self;
+// 是否允许手势左滑返回上一级, 类似导航控制的左滑返回
+webView.allowsBackForwardNavigationGestures = YES;
+[webView loadRequest:[NSURLRequest requestWithURL:[NSURL URLWithString:@"http://shop.cwcwallet.com/data/agreement.html"]]];
+[view1 addSubview:webView];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>0D5189C4-67C7-479E-8446-5921BA7EA004</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>WKWebView的使用</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

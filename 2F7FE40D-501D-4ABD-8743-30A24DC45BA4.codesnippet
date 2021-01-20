@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cccolor</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+//获取图片某一点的颜色
+- (UIColor *)colorAtPixel:(CGPoint)point {
+     if (!CGRectContainsPoint(CGRectMake(0.0f, 0.0f, self.image.size.width, self.image.size.height), point)) {
+         return nil;
+     }
+     
+     NSInteger pointX = trunc(point.x);
+     NSInteger pointY = trunc(point.y);
+     CGImageRef cgImage = self.image.CGImage;
+     NSUInteger width = self.image.size.width;
+     NSUInteger height = self.image.size.height;
+     CGColorSpaceRef colorSpace = CGColorSpaceCreateDeviceRGB();
+     int bytesPerPixel = 4;
+     int bytesPerRow = bytesPerPixel * 1;
+     NSUInteger bitsPerComponent = 8;
+     unsigned char pixelData[4] = { 0, 0, 0, 0 };
+     CGContextRef context = CGBitmapContextCreate(pixelData,
+                                                  1,
+                                                  1,
+                                                  bitsPerComponent,
+                                                  bytesPerRow,
+                                                  colorSpace,
+                                                  kCGImageAlphaPremultipliedLast |     kCGBitmapByteOrder32Big);
+     CGColorSpaceRelease(colorSpace);
+     CGContextSetBlendMode(context, kCGBlendModeCopy);
+     
+     CGContextTranslateCTM(context, -pointX, pointY-(CGFloat)height);
+     CGContextDrawImage(context, CGRectMake(0.0f, 0.0f, (CGFloat)width, (CGFloat)height), cgImage);
+     CGContextRelease(context);
+     
+     CGFloat red   = (CGFloat)pixelData[0] / 255.0f;
+     CGFloat green = (CGFloat)pixelData[1] / 255.0f;
+     CGFloat blue  = (CGFloat)pixelData[2] / 255.0f;
+     CGFloat alpha = (CGFloat)pixelData[3] / 255.0f;
+
+     return [UIColor colorWithRed:red green:green blue:blue alpha:alpha];
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>2F7FE40D-501D-4ABD-8743-30A24DC45BA4</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>获取图片某一点的颜色</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

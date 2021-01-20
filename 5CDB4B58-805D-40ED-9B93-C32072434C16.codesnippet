@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccnet</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>        let method = "v1/mine/index"
+        let dic = ["" : ""]
+        IndicatorView.show(self.view)
+        kNWork.requstDatas(.get, urlString: method, parames: dic) { (obj) in
+
+            IndicatorView.hide(self.view)
+            let resposeModel = ResposeModel.deserialize(from: obj.dictionaryValue)
+            if resposeModel?.code == "200" {
+
+                let dataModel = RubbishModel.deserialize(from: resposeModel?.data)
+                print("success")
+
+            } else {
+                ToastManager.makeToast((resposeModel?.message)!)
+            }
+
+
+        } falseBack: { () in
+            IndicatorView.hide(self.view)
+            ToastManager.makeToast("请检查网络")
+        }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>5CDB4B58-805D-40ED-9B93-C32072434C16</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift 发起网络请求</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccatt</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSMutableAttributedString *string = [[NSMutableAttributedString alloc] init];
+        NSMutableParagraphStyle *paragrah = [[NSMutableParagraphStyle alloc] init];
+        paragrah.lineSpacing = 6;   // 行间距
+        paragrah.paragraphSpacing = 6; // 段落间距
+        NSRange range = NSMakeRange(0, string.length);
+        [string addAttribute:NSParagraphStyleAttributeName value:paragrah range:range];
+        [string addAttribute:NSForegroundColorAttributeName value:Publie_Color range:NSMakeRange(0, model.nickname.length)];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>FA86DEA3-8E52-4EF1-ADA5-95CB986E9DF7</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>富文本 段落</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

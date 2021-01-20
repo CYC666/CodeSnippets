@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccwmpage</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+- (instancetype)init {
+    self = [super init];
+    if (self) {
+        
+        self.menuItemWidth = 60;
+        self.menuViewStyle = WMMenuViewStyleLine;
+        self.titleSizeSelected = 24;
+        self.titleSizeNormal = 24;
+        self.titleFontName = @"PingFangSC-Medium";
+        self.titleColorSelected = cLabColA;
+        self.titleColorNormal = cLabColC;
+        self.menuHeight = 40;
+        self.progressHeight = 4;
+        self.progressWidth = 23;
+        self.viewFrame = CGRectMake(0, cNavStart, cScreenWidth, cScreenHeight - cNavStart - cTabHeight);
+        self.itemsMargins = @[@20,@10,@(cScreenWidth - 20 - 60 - 10 - 60)];
+        self.progressColor = Publie_Color;
+        self.menuBGColor = cWhiteColor;
+        self.progressViewIsNaughty = YES;
+        self.progressViewCornerRadius = 2;
+        
+    }
+    return self;
+}
+
+- (NSArray&lt;NSString *&gt; *)titles {
+    return @[@"推荐", @"新人"];
+}
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+    
+    self.navigationController.navigationBar.hidden = YES;
+    
+}
+
+#pragma mark ========================================动作响应=============================================
+
+
+#pragma mark ========================================网络请求=============================================
+
+
+
+#pragma mark ========================================代理方法=============================================
+
+- (NSInteger)numbersOfChildControllersInPageController:(WMPageController *)pageController {
+    return self.titles.count;
+}
+
+- (NSString *)pageController:(WMPageController *)pageController titleAtIndex:(NSInteger)index {
+    return self.titles[index];
+}
+
+
+- (UIViewController *)pageController:(WMPageController *)pageController viewControllerAtIndex:(NSInteger)index {
+    
+    return [UIViewController new];
+    
+    
+    
+}
+
+- (void)pageController:(WMPageController *)pageController didEnterViewController:(__kindof UIViewController *)viewController withInfo:(NSDictionary *)info {
+    
+    
+    
+    
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>50616F9E-2DB2-4D18-AF76-851843EEAC1F</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>初始化WMPageController</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

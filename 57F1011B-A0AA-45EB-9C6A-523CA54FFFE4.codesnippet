@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccwindow</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//1、获取当前设备屏幕对象
+
+UIScreen *screen = [UIScreen mainScreen];
+
+//2、用对象的位置、大小创建窗口
+
+_window = [[UIWindow alloc] initWithFrame:screen.bounds];
+
+//3、给窗口背景添加颜色
+
+_window.backgroundColor = [UIColor blueColor];
+
+//4、设置窗口的根视图控制器
+
+[_window setRootViewController:[[UIViewController alloc] init]];
+
+//5、显示窗口
+
+[_window makeKeyAndVisible];
+
+//设置优先级
+
+_window.windowLevel = UIWindowLevelAlert;       //设置窗口优先级   会把状态栏遮住</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>57F1011B-A0AA-45EB-9C6A-523CA54FFFE4</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>窗口设置</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string></string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>四、AVAudioRecorder 录音
+
+1、导入框架
+
+#import
+
+2、设置存放录音文件的沙盒路径，录音文件格式为aac，内存小，音质好
+
+NSString *path = [NSHomeDirectory() stringByAppendingPathComponent:@"Documents/recoder.aac"];
+
+3、每次录音之前把旧的录音文件删掉
+
+[[NSFileManager defaultManager] removeItemAtPath:path error:nil];
+
+4、录音配置信息
+
+NSDictionary *info = @{
+    
+    AVFormatIDKey :
+        
+        [NSNumber numberWithInt:kAudioFormatMPEG4AAC], //定义文件的格式mac
+    
+    AVSampleRateKey : @1000,                 //采样率 11400, 32000, 8000
+    
+    AVNumberOfChannelsKey : @2,            //通道的数目（1单声道,2立体声）
+    
+    AVLinearPCMBitDepthKey : @8,            //采样位数（8, 16, 24, 32）
+    
+    AVLinearPCMIsBigEndianKey : @NO,            //大端还是小端 （内存的组织方式）
+    
+    AVLinearPCMIsFloatKey : @NO            //采样信号是整数还是浮点数
+    
+};
+
+5、根据配置信息创建录音对象，全局的，创建前先将其置为nil
+
+_fileUrl = [NSURL fileURLWithPath:path];
+
+NSError *error = nil;
+
+_recoder = [[AVAudioRecorder alloc] initWithURL:_fileUrl
+            
+                                       settings:info
+            
+                                          error:&amp;error];
+
+6、准备录音
+
+[_recoder prepareToRecord];
+
+7、开始录音
+
+[_recoder record];
+
+8、播放录音
+
+_player = nil;
+
+_player = [[AVAudioPlayer alloc] initWithContentsOfURL:_fileUrl error:nil];
+
+[_player prepareToPlay];
+
+[_player play];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>5AA650B4-884C-4A59-9A67-21D877ED62B6</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>录音</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

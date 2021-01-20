@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ssAlert</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let alertController = UIAlertController(title: "My Title", message: "This is an alert", preferredStyle:UIAlertControllerStyle.alert)
+            
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel) { _ in
+            print("you have pressed the Cancel button");
+        }
+        alertController.addAction(cancelAction)
+            
+        let OKAction = UIAlertAction(title: "OK", style: .default) { _ in
+            print("you have pressed OK button");
+            
+            let userName = alertController.textFields![0].text
+            let password = alertController.textFields![1].text
+            
+            self.doSomething(userName, password: password)
+        }
+        alertController.addAction(OKAction)
+        
+        alertController.addTextField(configurationHandler: {(textField : UITextField!) in
+            textField.placeholder = "User Name"
+            textField.isSecureTextEntry = false
+        })
+        
+        alertController.addTextField(configurationHandler: {(textField : UITextField!) in
+            textField.placeholder = "Password"
+            textField.isSecureTextEntry = true
+        })
+            
+        self.present(alertController, animated: true, completion:{ () -&gt; Void in
+             //your code here
+        })      </string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>6ECB6360-FDA2-4DB9-9504-5CEC909AECF3</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>swift 带输入框的Alert</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

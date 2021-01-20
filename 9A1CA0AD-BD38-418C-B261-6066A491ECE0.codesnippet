@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccbutton</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>{
+    UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake((kScreenWidth - 225)/2.0, height + 53, 225, 50)];
+    cBtnFont(button, WLFont(15))
+    cBtnColor(button, cWhiteColor)
+    cBtnTitle(button, @"提交")
+    button.backgroundColor = kMainColor;
+    cBtnSelector(button, button2Action:)
+    [scrollView addSubview:button];
+    height = button.c_bottom;
+    kShadow1(button)
+    self.button1 = button;
+    
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>9A1CA0AD-BD38-418C-B261-6066A491ECE0</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Button</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

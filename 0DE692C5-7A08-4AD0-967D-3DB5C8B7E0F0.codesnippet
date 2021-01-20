@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cctabbar</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 去除顶部那根线
+    [UITabBar appearance].translucent = NO;
+    if (@available(iOS 13.0, *)) {
+       UITabBarAppearance *appearance = [UITabBarAppearance new];
+       appearance.backgroundColor = [UIColor whiteColor];
+       appearance.backgroundImage = [UIImage new];
+       appearance.shadowColor = [UIColor clearColor];
+       appearance.shadowImage = [UIImage new];
+       UITabBarItemStateAppearance *normal = appearance.stackedLayoutAppearance.normal;
+       if (normal) {
+           normal.titleTextAttributes = @{NSForegroundColorAttributeName:KRGBACOLOR(123, 123, 123, 1),NSFontAttributeName:second_font};
+       }
+       UITabBarItemStateAppearance *selected = appearance.stackedLayoutAppearance.selected;
+       if (selected) {
+           selected.titleTextAttributes = @{NSForegroundColorAttributeName:KRGBACOLOR(78, 126, 215, 1),NSFontAttributeName:second_font};
+       }
+       self.tabBar.standardAppearance = appearance;
+       
+    } else {
+
+       [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:KRGBACOLOR(123, 123, 123, 1),NSFontAttributeName:second_font} forState:UIControlStateNormal];
+       [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName:KRGBACOLOR(78, 126, 215, 1),NSFontAttributeName:second_font} forState:UIControlStateSelected];
+    }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>0DE692C5-7A08-4AD0-967D-3DB5C8B7E0F0</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>去掉TabBar顶部那根线</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

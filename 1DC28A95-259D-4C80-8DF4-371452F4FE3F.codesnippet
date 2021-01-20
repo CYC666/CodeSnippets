@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccattri</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSString *text1 = [NSString stringWithFormat:@"+%@", model[@"amount"]];
+NSString *text = [NSString stringWithFormat:@"%@ TLS", text1];
+NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
+[string addAttribute:NSForegroundColorAttributeName value:Button_Color1 range:[text rangeOfString:text1]];
+
+cell.label1.attributedText = string;</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>1DC28A95-259D-4C80-8DF4-371452F4FE3F</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>创建富文本</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

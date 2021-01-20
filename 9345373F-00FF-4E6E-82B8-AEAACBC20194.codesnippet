@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cc3dtouch</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>- (NSArray&lt;id&lt;UIPreviewActionItem&gt;&gt; *)previewActionItems {
+    
+    NSMutableArray *arrItem = [NSMutableArray array];
+    
+    UIPreviewAction *previewAction0 = [UIPreviewAction actionWithTitle:RCDLocalizedString(@"Cancel") style:UIPreviewActionStyleDestructive handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        
+        NSLog(@"didClickCancel");
+    }];
+    
+    UIPreviewAction *previewAction1 = [UIPreviewAction actionWithTitle:RCDLocalizedString(@"Yes") style:UIPreviewActionStyleDefault handler:^(UIPreviewAction * _Nonnull action, UIViewController * _Nonnull previewViewController) {
+        
+        
+        
+    }];
+    
+    [arrItem addObjectsFromArray:@[previewAction0 ,previewAction1]];
+    
+    return arrItem;
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>9345373F-00FF-4E6E-82B8-AEAACBC20194</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>3D Touch 上拉的菜单</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

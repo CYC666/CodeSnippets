@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccshahe</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 1、获取应用程序沙盒下的Documents目录（购物车列表）
+    NSString *filePath = LOCATION_CART_PATH;
+    NSMutableArray *list = [[NSMutableArray alloc] initWithContentsOfFile:filePath];
+    if (!list) {
+        list = [NSMutableArray array];
+    }
+    NSLog(@"%@", list);</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>99202D09-B7AD-4862-BF10-494C8F449001</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>从沙河路径获取一个可变数组</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

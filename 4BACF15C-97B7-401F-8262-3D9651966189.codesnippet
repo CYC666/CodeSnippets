@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccpost</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let dict: [String: Any] = ["page_size": 100,"page_num": 1]
+
+let provider = MoyaProvider&lt;SNApi2&gt;()
+SHOW_SVP()
+provider.request(.voteTop(dict: dict)) { (result) in
+    switch result {
+    case let .success(response):
+        let json = JSON(response.data)
+        print(json)
+        if let model = RespondModel&lt;String&gt;.deserialize(from: json.dictionaryValue) {
+            
+            if model.code == "0" {
+                
+                HIDE_SVP()
+                
+                if let aaa = AAAModel.deserialize(from: model.data) {
+                    
+                    
+                    
+                    
+                }
+                
+                
+            } else {
+                
+                SHOW_ERROR(title: model.msg)
+            }
+        }
+    case let.failure(error):
+        print(error)
+        SHOW_ERROR(title: "请求失败，请检查网络")
+    }
+    
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>4BACF15C-97B7-401F-8262-3D9651966189</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>SPPED网络请求</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

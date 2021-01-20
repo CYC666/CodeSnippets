@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccnetlist</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#pragma mark - 获取列表
+- (void)loadListAction:(BOOL)isfooter {
+    
+    if (isfooter) {
+        currentPage ++;
+    } else {
+        currentPage = 1;
+        [dataArray removeAllObjects];
+    }
+    
+    NSString *PageIndex =[NSString stringWithFormat:@"%ld", currentPage];
+    
+    NSString *method = [NSString stringWithFormat:@"GetForumReleaseList"];
+    NSDictionary *dic = [NSDictionary dictionaryWithObjectsAndKeys:
+                         [UserInformation sharedInstance].UserId,@"UserId",
+                         @"20",@"PageSize",
+                         PageIndex,@"PageIndex",
+                         nil];
+    
+
+    
+    //发送soap请求
+    [SOAPUrlSession SOAPDataWithMethod:method parameter:dic success:^(id responseObject) {
+        
+        
+        NSNumber *responseCode = responseObject[@"Code"];
+        
+        
+        NSArray *list;
+        if ([responseCode isEqualToNumber:@200]) {
+            
+            list = responseObject[@"Data"][@"rows"];
+            for (NSDictionary *dic in list) {
+//                TransferModel *model = [TransferModel mj_objectWithKeyValues:dic];
+//                [dataArray addObject:model];
+            }
+            
+            
+        } else {
+            
+            SVP_ERROR(responseObject[@"Message"])
+
+        }
+        
+        if (list.count &gt;= 20) {
+            [_listTableView.mj_footer endRefreshing];
+        } else {
+            [_listTableView.mj_footer endRefreshingWithNoMoreData];
+        }
+        
+        if (isfooter) {
+            // 上拉加载，使用增量加载
+            NSMutableArray *indexPaths = [NSMutableArray array];
+            for (NSInteger i = 0; i &lt; list.count; i++) {
+                NSIndexPath *indexPath = [NSIndexPath indexPathForRow:dataArray.count - list.count + i inSection:0];
+                [indexPaths addObject:indexPath];
+            }
+            _listTableView.mj_footer.alpha = 0;
+            [_listTableView insertRowsAtIndexPaths:indexPaths withRowAnimation:UITableViewRowAnimationNone];
+            dispatch_after(dispatch_time(DISPATCH_TIME_NOW, (int64_t)(1 * NSEC_PER_SEC)), dispatch_get_main_queue(), ^{
+                _listTableView.mj_footer.alpha = 1;
+            });
+            
+        } else {
+            // 下拉刷新，直接刷新
+            [_listTableView reloadData];
+        }
+        
+        
+        
+    } failure:^(NSError *error) {
+        
+        SVP_ERROR(@"网络异常：连接服务器失败")
+        
+    }];
+    
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>CB295D2F-18ED-45BF-A8EA-AB6CE32AE48A</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Net 加载列表方法</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

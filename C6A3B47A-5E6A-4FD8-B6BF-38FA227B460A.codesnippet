@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cccode</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>    // MARK:验证码倒计时
+    @objc func smsButtonAction(_ button: UIButton) {
+        
+        var timeout = 120
+        let timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
+        timer.schedule(wallDeadline: .now(), repeating: 1)
+        timer.setEventHandler(handler: {
+            timeout -= 1
+            if timeout == 0 {
+                timer.cancel()
+                button.isUserInteractionEnabled = true
+                button.setTitle("获取验证码", for: .normal)
+            } else {
+                button.isUserInteractionEnabled = false
+                button.setTitle(String(timeout), for: .normal)
+            }
+        })
+        timer.resume()
+    }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>C6A3B47A-5E6A-4FD8-B6BF-38FA227B460A</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift 验证码倒计时实现</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>

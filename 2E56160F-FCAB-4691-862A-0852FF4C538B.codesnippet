@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccdevice</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 获取设备信息
+UIDevice *device = [[UIDevice alloc] init];
+
+NSString *name = device.name;      //获取设备所有者的名称
+
+NSString *model = device.name;      //获取设备的类别
+
+NSString *type = device.localizedModel; //获取本地化版本
+
+NSString *systemName = device.systemName;  //获取当前运行的系统
+
+NSString *systemVersion = device.systemVersion;//获取当前系统的版本</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>2E56160F-FCAB-4691-862A-0852FF4C538B</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>获取设备信息</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

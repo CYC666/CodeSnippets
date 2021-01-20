@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccpath</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>{
+            // Test 画圆弧
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(kSpaceSize, height + kSpaceSize, cScreenWidth - kSpaceSize*2, 300)];
+            view.backgroundColor = Content_Color;
+            [scrollView addSubview:view];
+            height = view.c_bottom;
+            
+            // 折线
+            CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
+            shapeLayer.frame = view.bounds;
+            shapeLayer.lineWidth = 1;
+            shapeLayer.lineCap = @"round";
+            shapeLayer.fillColor = cClearColor.CGColor;
+            shapeLayer.strokeColor = [UIColor orangeColor].CGColor;
+            [view.layer addSublayer:shapeLayer];
+            
+            UIBezierPath *path = [UIBezierPath bezierPathWithArcCenter:CGPointMake(view.c_width/2.0, view.c_height/2.0)
+                                                                radius:view.c_height/2.0-10
+                                                            startAngle:M_PI
+                                                              endAngle:M_PI_2
+                                                             clockwise:YES];
+            shapeLayer.path = path.CGPath;
+            
+        }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>14AD68B4-C420-40F9-B5B9-1808889C0106</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>画圆弧</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

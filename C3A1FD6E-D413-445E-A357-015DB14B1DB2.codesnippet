@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cclabei</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>UILabel *label = [[UILabel alloc] initWithFrame:CGRectMake(&lt;#X#&gt;, &lt;#Y#&gt;, &lt;#width#&gt;, &lt;#height#&gt;)];
+label.textAlignment = NSTextAlignmentLeft;
+label.numberOfLines = 1;
+label.textColor = Color_A;
+label.font = PFR(14);
+label.text = @"";
+[scrollView addSubview:label];
+height = label.c_bottom;</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>C3A1FD6E-D413-445E-A357-015DB14B1DB2</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Label</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

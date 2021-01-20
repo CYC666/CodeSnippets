@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccges</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#pragma mark - 侧滑返回
+- (void)edgePanAction:(UIScreenEdgePanGestureRecognizer *)edgePan {
+    
+    if (edgePan.state == UIGestureRecognizerStateEnded) {
+        [self.navigationController popViewControllerAnimated:YES];
+    }
+    
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>0E853125-6664-4295-A7F5-F995E008E87D</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>屏幕边缘手势-实现</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccblur</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 毛玻璃
+UIBlurEffect *blur = [UIBlurEffect effectWithStyle:UIBlurEffectStyleDark];                  // 特效
+UIVisualEffectView *visualEffectView = [[UIVisualEffectView alloc] initWithEffect:blur];    // 承载特效的视图
+visualEffectView.alpha = 0.5;
+visualEffectView.frame = CGRectMake(0, 0, kScreenWidth, kScreenHeight);
+[_button1 insertSubview:visualEffectView atIndex:0];                                            // 在哪个视图添加特效视图</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>AD2F44C6-AAB2-46A5-8B40-5CC818753260</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>毛玻璃</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

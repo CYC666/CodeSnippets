@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccdate</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSCalendar *calendar = [NSCalendar currentCalendar];
+NSUInteger unitFlags = kCFCalendarUnitHour|kCFCalendarUnitMinute|kCFCalendarUnitSecond;
+NSDateComponents *com = [calendar components:unitFlags fromDate:[NSDate date]];
+com.hour</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>9216C2FC-DC1D-48A9-8431-F0C52D2C16BD</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>日历转成日期</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

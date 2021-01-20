@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccatributed</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSString *text = @"发票信息 ";
+NSTextAttachment * attach= [[NSTextAttachment alloc] init];
+attach.image = [UIImage imageNamed:@"travel_details_details"];
+attach.bounds = CGRectMake(0, 0, 15, 15);
+NSAttributedString *att = [NSAttributedString attributedStringWithAttachment:attach];
+NSMutableAttributedString *mutableAtt  = [[NSMutableAttributedString alloc] initWithString:text];
+[mutableAtt appendAttributedString:att];
+label1.attributedText = mutableAtt;</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>023DED2B-6865-4060-8532-E1BE316845C8</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>图文混排</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

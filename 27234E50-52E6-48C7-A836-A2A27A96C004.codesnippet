@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccatt</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>            let text1 : NSString = "客服联系电话: "
+            let text2 : NSString = "400-5009-6008"
+            let text3 = NSString.init(format: "%@%@", text1, text2)
+            let str = NSMutableAttributedString.init(string: text3 as String)
+            str.addAttribute(.foregroundColor, value: kMainColor, range: text3.range(of: text2 as String))
+            btn.setAttributedTitle(str, for: .normal)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>27234E50-52E6-48C7-A836-A2A27A96C004</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift富文本</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

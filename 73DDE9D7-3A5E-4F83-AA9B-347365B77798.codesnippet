@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccfield</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let field = UITextField.init(frame: CGRect.init(x: &lt;#value#&gt;, y: &lt;#value#&gt;, width: &lt;#value#&gt;, height:&lt;#value#&gt;))
+field.textColor = kLabelColor1
+field.font = kRFont(16)
+field.keyboardType = .decimalPad
+field.clearButtonMode = .never
+view1.addSubview(field)
+field.placeholder = ""</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>73DDE9D7-3A5E-4F83-AA9B-347365B77798</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>field</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cctxl</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+#pragma mark - 用户点击联系人获取方法 两个方法都写只调用此方法
+-(void)contactPicker:(CNContactPickerViewController *)picker didSelectContact:(CNContact *)contact{
+    
+    //    NSLog(@"contact : %@",contact);
+    
+    // 姓氏               名字
+    NSLog(@"name:%@%@",contact.familyName,contact.givenName);
+    
+    //公司名
+    NSLog(@"公司: %@",contact.organizationName);
+    
+    //获取通讯录某个人所有电话并存入数组中 需要哪个取哪个
+    NSMutableArray * arrMPhoneNums = [NSMutableArray array];
+    for (CNLabeledValue * labValue in contact.phoneNumbers) {
+        
+        NSString * strPhoneNums = [labValue.value stringValue];
+        NSLog(@"所有电话是: %@",strPhoneNums);
+        [arrMPhoneNums addObject:strPhoneNums];
+    }
+    
+    //所有邮件地址数组
+    NSMutableArray * arrMEmails = [NSMutableArray array];
+    for (CNLabeledValue * labValue in contact.emailAddresses) {
+        
+        NSLog(@"email : %@",labValue.value);
+        [arrMEmails addObject:labValue.value];
+    }
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 用户点进去获取属性调用方法 例如从通讯录选择联系人打电话两个方法都写只调用上面方法
+- (void)contactPicker:(CNContactPickerViewController *)picker didSelectContactProperty:(CNContactProperty *)contactProperty{
+    
+    //    NSLog(@"contactProperty : %@",contactProperty);
+    //    NSLog(@"contact : %@",contactProperty.contact);
+    //    NSLog(@"key : %@",contactProperty.key);
+    //    [[UIApplication sharedApplication] openURL:url];
+    //    NSLog(@"identifier : %@",contactProperty.identifier);
+    //    NSLog(@"label : %@",contactProperty.label);
+    //获得点击的属性,在此进行处理...
+    NSLog(@"value : %@",[contactProperty.value stringValue]);
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}
+
+#pragma mark - 取消
+- (void)contactPickerDidCancel:(CNContactPickerViewController *)picker{
+    
+    [picker dismissViewControllerAnimated:YES completion:nil];
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>2D7B3B99-3057-4D93-907A-99C4120C0812</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>通讯录代理方法</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

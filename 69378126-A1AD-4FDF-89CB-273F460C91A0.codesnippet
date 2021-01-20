@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccpicker</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>UIImagePickerController *picker = [[UIImagePickerController alloc] init];
+if ([UIImagePickerController isSourceTypeAvailable:UIImagePickerControllerSourceTypeCamera]) {
+    picker.sourceType = UIImagePickerControllerSourceTypeCamera;
+} else {
+    picker.sourceType = UIImagePickerControllerSourceTypeSavedPhotosAlbum;
+}
+
+picker.delegate = self;
+picker.allowsEditing = YES;
+picker.navigationBar.translucent = NO;
+[self presentViewController:picker animated:YES completion:^{
+    Status_Dark
+    }];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>69378126-A1AD-4FDF-89CB-273F460C91A0</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>创建imagepicker</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

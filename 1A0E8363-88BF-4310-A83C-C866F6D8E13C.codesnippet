@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cctip</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>class SlideronView: UIView {
+    
+    var backBtn = UIButton()
+    var mainView = UIView()
+    
+    override init(frame: CGRect) {
+        super.init(frame: UIScreen.main.bounds)
+        // UIApplication.shared.keyWindow?.addSubview(self)
+        kPManager.window?.addSubview(self)
+        creatUIAction()
+    }
+    required init?(coder: NSCoder) {
+        super.init(coder: coder)
+    }
+    
+    // MARK:创建视图
+    @objc func creatUIAction() {
+        
+        // ================底部半黑返回按钮================
+        let bBtn = UIButton.init(frame: CGRect.init(x: 0,
+                                                   y: 0,
+                                                   width: kScreenWidth,
+                                                   height: kScreenHeight))
+        bBtn.backgroundColor = .init(red: 0, green: 0, blue: 0, alpha: 0.3)
+        bBtn.alpha = 0
+        bBtn.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        self.backBtn = bBtn
+        self.addSubview(bBtn)
+        
+        // ================可视区域================
+        let view = UIView.init(frame: CGRect.init(x: (self.c_width() - 300)/2.0,
+                                                  y: (self.c_height() - 174)/2.0 + kScreenHeight,
+                                                  width: 300,
+                                                  height: 174))
+        view.backgroundColor = .white
+        view.c_radius(radius:10)
+        self.mainView = view
+        self.addSubview(view)
+        
+        // ================出现时的动画================
+        UIView.animate(withDuration: 0.1, animations: {
+            
+            bBtn.alpha = 1
+            
+        }) { (animal) in
+            
+            UIView.animate(withDuration: 0.25) {
+                view.transform = .init(translationX: 0, y: -kScreenHeight)
+            }
+        }
+        
+    }
+    
+    // MARK:退出
+    @objc func backAction() {
+        
+        // 退出时的动画
+        UIView.animate(withDuration: 0.25, animations: {
+            
+            self.mainView.transform = .init(translationX: 0, y: 0)
+            
+        }) { (animal) in
+            
+            UIView.animate(withDuration: 0.15, animations: {
+                
+                self.backBtn.alpha = 0
+                
+            }) { (animal2) in
+                
+                self.removeFromSuperview()
+            }
+            
+        }
+    }
+    
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>1A0E8363-88BF-4310-A83C-C866F6D8E13C</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift全屏弹窗</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccdisnotify</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>dispatch_group_t group = dispatch_group_create();
+    
+    dispatch_queue_t aaa = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_enter(group);        // 计数 +1
+    dispatch_async(aaa,^{
+        
+        dispatch_group_leave(group);    // 计数 -1
+        NSLog(@"=== 任务 A 完成 ===");
+    });
+    
+    dispatch_queue_t bbb = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_enter(group);
+    dispatch_async(bbb,^{
+        
+        dispatch_group_leave(group);
+        NSLog(@"=== 任务 B 完成 ===");
+    });
+    
+    dispatch_queue_t ccc = dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0);
+    dispatch_group_enter(group);
+    dispatch_async(ccc,^{
+        
+        dispatch_group_leave(group);
+        NSLog(@"=== 任务 C 完成 ===");
+    });
+    
+    // 三次结束后执行
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        NSLog(@"=== 任务 S 完成 ===");
+    });</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>316E3306-5FF9-4D4A-8049-AFFD4FD1EB36</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>任务汇总</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

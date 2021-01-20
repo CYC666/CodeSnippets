@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccxcx</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 分享至小程序
+            WXMiniProgramObject *wxObj = [WXMiniProgramObject object];
+            wxObj.webpageUrl = _detialModel.shareResponse.link;           // 兼容低版本链接
+            wxObj.userName = _detialModel.shareResponse.miniAppId;        // 小程序原始ID
+            wxObj.path = _detialModel.shareResponse.path;                 // 小程序页面路径
+            wxObj.hdImageData = UIImageJPEGRepresentation(image, 0.1);    // 高清大图，小于128k
+            
+            WXMediaMessage *wxMsg = [WXMediaMessage message];
+            wxMsg.title = _detialModel.shareResponse.title;               // 小程序标题
+            wxMsg.description = _detialModel.shareResponse.desc;          // 小程序描述
+            wxMsg.mediaObject = wxObj;
+            wxMsg.thumbData = nil;                                        // 缩略图，小于32k
+            
+            SendMessageToWXReq *req = [[SendMessageToWXReq alloc] init];
+            req.message = wxMsg;
+            req.scene = WXSceneSession;
+            
+            [WXApi sendReq:req];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>D817D708-AD07-46A5-88F1-17F66B14B6B9</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>分享小程序</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

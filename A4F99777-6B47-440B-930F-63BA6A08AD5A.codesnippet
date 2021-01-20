@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string></string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>{
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(kSpaceSize, height, cScreenWidth - kSpaceSize*2, 400)];
+            view.backgroundColor = Area_Color;
+            cViewBottomRadius(view, kRadiusSize)
+            [scrollView addSubview:view];
+            height = view.c_bottom;
+            
+            UIButton *button = [[UIButton alloc] initWithFrame:CGRectMake(kSpaceSize, (view.c_height - kButtonHeight)/2.0, view.c_width - kSpaceSize*2, kButtonHeight)];
+            cBtnFont(button, PFB(14))
+            cBtnColor(button, cWhiteColor)
+            cBtnTitle(button, RCDLocalizedString(@"退出钱包"))
+            cViewRadius(button, button.c_height/2.0)
+            cBtnSelector(button, goToLiquidaAction:)
+            button.backgroundColor = Publie_Color;
+            
+            [view addSubview:button];
+            
+            /**&lt; 初始化渐变层 */
+            CAGradientLayer *gradientColorLayer2 = [CAGradientLayer layer];
+            gradientColorLayer2.frame = button.bounds;
+            [button.layer insertSublayer:gradientColorLayer2 atIndex:0];
+            gradientColorLayer2.colors = @[(__bridge id)Left_Color.CGColor,
+                                           (__bridge id)Center_Color.CGColor,
+                                           (__bridge id)Right_Color.CGColor];
+            gradientColorLayer2.locations  = @[@(0), @(0.5), @(1.0)];
+            gradientColorLayer2.startPoint = CGPointMake(0, 0);
+            gradientColorLayer2.endPoint   = CGPointMake(1, 0);
+        }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>A4F99777-6B47-440B-930F-63BA6A08AD5A</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>My Code Snippet</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cccollectionView</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeExpression</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>t = UICollectionViewFlowLayout()
+        flowLayout.minimumInteritemSpacing = 0
+        flowLayout.minimumLineSpacing = 0
+        flowLayout.itemSize = CGSize(width: kScreenWidth * 0.25, height: kScreenWidth * 0.25 + 15)
+        mainCollectionView = UICollectionView(frame:CGRect(x: 0, y: 0, width: kScreenWidth, height: kScreenHeight) , collectionViewLayout: flowLayout)
+        mainCollectionView?.backgroundColor = UIColor.white
+        mainCollectionView?.alwaysBounceVertical = true
+        mainCollectionView?.register(UINib(nibName: "LittlePlayerCell", bundle:Bundle.main), forCellWithReuseIdentifier: "LittlePlayerCell")
+        mainCollectionView?.delegate = self
+        mainCollectionView?.dataSource = self
+        view.addSubview(mainCollectionView!)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>CAF4BB16-6FA1-4358-9E65-EFF9F916508D</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift 集合控制器</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

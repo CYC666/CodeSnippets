@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>CG</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+图形上下是一个CGContextRef类型的数据。
+图形上下文包含：
+1，绘图路径（各种各样图形）
+2，绘图状态（颜色，线宽，样式，旋转，缩放，平移）
+3，输出目标（绘制到什么地方去？UIView、图片）
+
+1，获取当前图形上下文
+CGContextRef ctx = UIGraphicsGetCurrentContext();
+2，添加线条
+CGContextMoveToPoint(ctx, 20, 20);
+3，渲染
+CGContextStrokePath(ctx);
+CGContextFillPath(ctx);
+4，关闭路径
+CGContextClosePath(ctx);
+5，画矩形
+CGContextAddRect(ctx, CGRectMake(20, 20, 100, 120));
+6，设置线条颜色
+[[UIColor redColor] setStroke];
+7， 设置线条宽度
+CGContextSetLineWidth(ctx, 20);
+8，设置头尾样式
+CGContextSetLineCap(ctx, kCGLineCapSquare);
+9，设置转折点样式
+CGContextSetLineJoin(ctx, kCGLineJoinBevel);
+10，画圆
+CGContextAddEllipseInRect(ctx, CGRectMake(30, 50, 100, 100));
+11，指定圆心
+CGContextAddArc(ctx, 100, 100, 50, 0, M_PI * 2, 1);
+12，获取图片上下文
+UIGraphicsGetImageFromCurrentImageContext();
+13，保存图形上下文
+CGContextSaveGState(ctx)
+14，恢复图形上下文
+CGContextRestoreGState(ctx)
+--------------------- 
+作者：iOS学堂 
+来源：CSDN 
+原文：https://blog.csdn.net/u011363981/article/details/73200844 
+版权声明：本文为博主原创文章，转载请附上博文链接！</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>DABDA50C-D001-4416-BACC-6BDE09101C4D</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Quartz2D 相关</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

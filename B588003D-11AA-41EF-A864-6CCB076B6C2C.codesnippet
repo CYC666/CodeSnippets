@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cclab</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let lab = UILabel.init(frame: CGRect.init(x: &lt;#value#&gt;, y: &lt;#value#&gt;, width: &lt;#value#&gt;, height: &lt;#value#&gt;))
+lab.textColor = kLabelColor1
+lab.textAlignment = .left
+lab.font = kRFont(15)
+lab.text = ""
+view.addSubview(lab)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>B588003D-11AA-41EF-A864-6CCB076B6C2C</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>label</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

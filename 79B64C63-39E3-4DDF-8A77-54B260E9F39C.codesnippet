@@ -1,0 +1,2103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccpppppp</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//
+//  PPPPPP.swift
+//  DeiPool
+//
+//  Created by CYC on 2020/3/9.
+//  Copyright © 2020 Hello. All rights reserved.
+//
+
+import UIKit
+
+
+import BigInt
+import web3swift
+import Foundation
+
+struct Wallet {
+    let address: String
+    let data: Data
+    let name: String
+    let isHD: Bool
+}
+
+struct HDKey {
+    let name: String?
+    let address: String
+}
+
+typealias ObjectBlock = (Int, Int) -&gt; Int
+
+@objc
+class PPPPPP: NSObject {
+    
+    let pointNet: String = "http://8.210.211.252:8545"
+//    var web3obj = Web3.InfuraMainnetWeb3(accessToken: "ed1aacddc55f4adab5de75f0efd662e7")
+//    let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: pointNet)!)!)
+    let keyberWeb = Web3.InfuraMainnetWeb3()
+    let contractAdddress = EthereumAddress("0x970a610D93c5792F80b924f884735Cf3654E3d70")    // CYC666
+    let kyberAddress = EthereumAddress("0x818E6FECD516Ecc3849DAf6845e3EC868087B755")
+    
+    var abi = String()
+    var ERC20ABI = String()
+    var kyberABI = String()
+    
+    let pw = "p6a6s6s6w6o6r6d"
+    
+    override init() {
+        
+        super.init()
+        
+        let jsonData=NSData(contentsOfFile: Bundle.main.path(forResource: "ABI", ofType: "json")!)
+        self.abi = String(data: jsonData! as Data, encoding: String.Encoding.utf8)!
+
+        let jsonDataERC20=NSData(contentsOfFile: Bundle.main.path(forResource: "ERC20", ofType: "json")!)
+        self.ERC20ABI = String(data: jsonDataERC20! as Data, encoding: String.Encoding.utf8)!
+
+        let jsonDataKyber=NSData(contentsOfFile: Bundle.main.path(forResource: "kyber", ofType: "json")!)
+        self.kyberABI = String(data: jsonDataKyber! as Data, encoding: String.Encoding.utf8)!
+
+        
+
+    }
+
+
+    // MARK:=================DeiPool内部合约================
+    
+    // MARK:获取活期列表
+    @objc public func getMarketStateAction(result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.read("getMarketState", parameters: [], extraData: Data(), transactionOptions: nil)
+                
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                
+                // 调整返回数据
+                var list = [String : [String]]()
+                for item in aaa.keys {
+                    
+                    if item == "deposits" || item == "loans" || item == "collateral" || item == "capitalInCompound" || item == "borrowRatePerBlock" || item == "depositRatePerBlock"{
+
+                        let J : [NSObject] = aaa[item] as![NSObject]
+                        var K = [String]()
+
+                        for L in J{
+
+                            let S = String.init(format: "%@", L)
+                            K.append(S)
+                        }
+                        list.updateValue(K, forKey: item)
+                    } else if item == "addresses" {
+                        
+                        let array : [EthereumAddress] = aaa[item] as! [EthereumAddress]
+                        var _array : [String] = [String]()
+                        
+                        for A in array{
+                            
+                            _array.append(A.address)
+                            
+                        }
+                        
+                        list.updateValue(_array, forKey: item)
+                    }
+                   
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(list as AnyObject)
+                }
+                
+                
+            } catch {
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    print(error)
+                    result([String : [String]]() as AnyObject)
+                }
+            }
+        }
+    }
+    
+    // MARK:获取所有币种价格
+    @objc public func getCoinToUsdRateAction(result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.read("getCoinToUsdRate", parameters: [], extraData: Data(), transactionOptions: nil)
+                
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                
+                
+                // 调整返回数据
+                var list = [String : [String]]()
+                for item in aaa.keys {
+                    
+                    if item == "0"{
+
+                        let J : [NSObject] = aaa[item] as![NSObject]
+                        var K = [String]()
+
+                        for L in J{
+
+                            let S = String.init(format: "%@", L)
+                            K.append(S)
+                        }
+                        list.updateValue(K, forKey: "price")
+                    }
+                   
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(list as AnyObject)
+                }
+                
+                
+            } catch {
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    print(error)
+                    result([String : [String]]() as AnyObject)
+                }
+            }
+        }
+    }
+    
+    // MARK:获取所有币种的存款利率
+    @objc public func getNowRateAction(result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.read("getNowRate", parameters: [], extraData: Data(), transactionOptions: nil)
+                
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                
+                
+                // 调整返回数据
+                var list = [String : [String]]()
+                for item in aaa.keys {
+                    
+                    if item == "1" {
+
+                        let J : [NSObject] = aaa[item] as![NSObject]
+                        var K = [String]()
+
+                        for L in J{
+
+                            let S = String.init(format: "%@", L)
+                            K.append(S)
+                        }
+                        list.updateValue(K, forKey: "rate")
+                    } else if item == "0" {
+                        
+                        let array : [EthereumAddress] = aaa[item] as! [EthereumAddress]
+                        var _array : [String] = [String]()
+                        
+                        for A in array{
+                            
+                            _array.append(A.address)
+                            
+                        }
+                        
+                        list.updateValue(_array, forKey: "address")
+                    }
+                   
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    print(list)
+                    result(list as AnyObject)
+                }
+                
+                
+            } catch {
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    print(error)
+                    result([String : [String]]() as AnyObject)
+                }
+            }
+        }
+    }
+    
+    // MARK:获取所有存款的钱包地址
+    @objc public func getDepositWalletsAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let tokenAddress = dic["tokenAddress"]!
+                
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.read("activeLoansAccount", parameters: [], extraData: Data(), transactionOptions: nil)
+                
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                
+                
+                // 调整返回数据
+                var list = [String : [String]]()
+                for item in aaa.keys {
+                    
+                    if item == "0" {
+                        
+                        let array : [EthereumAddress] = aaa[item] as! [EthereumAddress]
+                        var _array : [String] = [String]()
+                        
+                        for A in array{
+                            
+                            _array.append(A.address)
+                            
+                        }
+                        
+                        list.updateValue(_array, forKey: "address")
+                    }
+                   
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    print(list)
+                    result(list as AnyObject)
+                }
+                
+                
+            } catch {
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    print(error)
+                    result([String : [String]]() as AnyObject)
+                }
+            }
+        }
+    }
+    
+    
+    // MARK:获取钱包存款利息
+    @objc public func getAccountInterestAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let walletAddress = dic["walletAddress"]!
+                
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.read("getAccountInterest", parameters: [EthereumAddress(walletAddress) as AnyObject], extraData: Data(), transactionOptions: nil)
+                
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                
+                
+                // 调整返回数据
+                var list = [String : [String]]()
+                for item in aaa.keys {
+                    
+                    if item == "usdValue" {
+
+                        let J : [NSObject] = aaa[item] as![NSObject]
+                        var K = [String]()
+
+                        for L in J{
+
+                            let S = String.init(format: "%@", L)
+                            K.append(S)
+                        }
+                        list.updateValue(K, forKey: "usdValue")
+                    }
+                   
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(list as AnyObject)
+                }
+                
+                
+            } catch {
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    print(error)
+                    result([String : [String]]() as AnyObject)
+                }
+            }
+        }
+    }
+    
+    
+    // MARK:获取挖矿奖励
+    @objc public func getRewardAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let walletAddress = dic["walletAddress"]!
+                
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.read("reward_get", parameters: [EthereumAddress(walletAddress) as AnyObject], extraData: Data(), transactionOptions: nil)
+                
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(aaa as AnyObject)
+                }
+                
+                
+            } catch {
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    print(error)
+                    result("" as AnyObject)
+                }
+            }
+        }
+    }
+    
+    
+    // MARK:获取存款的钱包
+    @objc public func getActiveAccountsAction(result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.read("getActiveAccounts", parameters: [] , extraData: Data(), transactionOptions: nil)
+                
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                
+                // 调整返回数据
+                var list = [String : [String]]()
+                for item in aaa.keys {
+
+                    if item == "0" {
+
+                        let array : [EthereumAddress] = aaa[item] as! [EthereumAddress]
+                        var _array : [String] = [String]()
+
+                        for A in array{
+
+                            _array.append(A.address)
+
+                        }
+
+                        list.updateValue(_array, forKey: "addresses")
+                    }
+
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(list as AnyObject)
+                }
+                
+                
+            } catch {
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    print(error)
+                    result([String : [String]]() as AnyObject)
+                }
+            }
+        }
+    }
+    
+  
+    
+    // MARK:获取借款的钱包
+    @objc public func getActiveLoansAccountAction(result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.read("getActiveLoansAccount", parameters: [] , extraData: Data(), transactionOptions: nil)
+                
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                
+                // 调整返回数据
+                var list = [String : [String]]()
+                for item in aaa.keys {
+
+                    if item == "0" {
+
+                        let array : [EthereumAddress] = aaa[item] as! [EthereumAddress]
+                        var _array : [String] = [String]()
+
+                        for A in array{
+
+                            _array.append(A.address)
+
+                        }
+
+                        list.updateValue(_array, forKey: "addresses")
+                    }
+
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(list as AnyObject)
+                }
+                
+                
+            } catch {
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    print(error)
+                    result([String : [String]]() as AnyObject)
+                }
+            }
+        }
+    }
+    
+    
+    // MARK:存款
+    @objc public func depositTokenAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let privateKeyStr = dic["privateKey"]!
+                let tokenStr = dic["address"]!
+                let amountStr = dic["amount"]!
+                let gasPrice = dic["gasPrice"]
+                
+                var amountStr1 = "0"
+                // 发送erc20的时候value设置为0
+                if tokenStr == "0x000000000000000000000000000000000000000E" {
+                    amountStr1 = amountStr
+                }
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                web3obj.addKeystoreManager(keystoreManager)
+                
+                
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt(amountStr1, units: .eth)
+                options.from = EthereumAddress(wallet.address)
+
+                options.gasPrice = .manual(BigUInt(gasPrice!.nsstring.integerValue))
+                options.gasLimit = .automatic
+                
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.write("depositToken",
+                                               parameters: [EthereumAddress(tokenStr), Web3.Utils.parseToBigUInt(amountStr, decimals: self.getWeiAction(coin: tokenStr))] as [AnyObject],
+                                               extraData: Data(),
+                                               transactionOptions: nil)
+                
+                // 发起智能合约请求
+                let aaa  = try transfer?.send(password: password, transactionOptions: options)
+                print(dic)
+                print("HASH:"+aaa!.hash)
+
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(aaa?.hash as AnyObject)
+                }
+                
+                
+            } catch {
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+
+            }
+        }
+        
+        
+    }
+    
+    // MARK:取款
+    @objc public func withdrawTokenAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let privateKeyStr = dic["privateKey"]!
+                let tokenStr = dic["address"]!
+                let amountStr = dic["amount"]!
+                let gasPrice = dic["gasPrice"]
+          
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+
+
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                web3obj.addKeystoreManager(keystoreManager)
+                
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt("0", units: .eth)
+                options.from = EthereumAddress(wallet.address)
+                options.gasPrice = .manual(BigUInt(gasPrice!.nsstring.integerValue))
+                options.gasLimit = .automatic
+                
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.write("withdrawToken", parameters: [EthereumAddress(tokenStr), Web3.Utils.parseToBigUInt(amountStr, decimals: self.getWeiAction(coin: tokenStr))] as [AnyObject], extraData: Data(), transactionOptions: nil)
+
+                // 发起智能合约请求
+                let aaa  = try transfer?.send(password: password, transactionOptions: options)
+                print(dic)
+                print("HASH:"+aaa!.hash)
+
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(aaa!.hash as AnyObject)
+                }
+                
+                
+            } catch {
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+            }
+        }
+        
+        
+    }
+    
+    // MARK:借款
+    @objc public func borrowAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let privateKeyStr = dic["privateKey"]!
+                let tokenStr = dic["address"]!
+                let amountStr = dic["amount"]!
+                let gasPrice = dic["gasPrice"]
+                
+
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                web3obj.addKeystoreManager(keystoreManager)
+                
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt("0", units: .eth)
+                options.from = EthereumAddress(wallet.address)
+                options.gasPrice = .manual(BigUInt(gasPrice!.nsstring.integerValue))
+                options.gasLimit = .automatic
+                
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.write("borrow", parameters: [EthereumAddress(tokenStr), Web3.Utils.parseToBigUInt(amountStr, decimals: self.getWeiAction(coin: tokenStr))] as [AnyObject], extraData: Data(), transactionOptions: nil)
+
+                // 发起智能合约请求
+                let aaa  = try transfer?.send(password: password, transactionOptions: options)
+                print(dic)
+                print("HASH:"+aaa!.hash)
+
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(aaa?.hash as AnyObject)
+                }
+                
+                
+            } catch {
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+            }
+        }
+        
+        
+    }
+    
+    // MARK:还款
+    @objc public func repayAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let privateKeyStr = dic["privateKey"]!
+                let tokenStr = dic["address"]!
+                let amountStr = dic["amount"]!  
+                let gasPrice = dic["gasPrice"]
+                
+                var amountStr1 = "0"
+                // 发送erc20的时候value设置为0
+                if tokenStr == "0x000000000000000000000000000000000000000E" {
+                    amountStr1 = amountStr
+                }
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                web3obj.addKeystoreManager(keystoreManager)
+                
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt(amountStr1, units: .eth)
+                options.from = EthereumAddress(wallet.address)
+                options.gasPrice = .manual(BigUInt(gasPrice!.nsstring.integerValue))
+                options.gasLimit = .automatic
+                
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.write("repay", parameters: [EthereumAddress(tokenStr), Web3.Utils.parseToBigUInt(amountStr, decimals: self.getWeiAction(coin: tokenStr))] as [AnyObject], extraData: Data(), transactionOptions: nil)
+
+                // 发起智能合约请求
+                let aaa  = try transfer?.send(password: password, transactionOptions: options)
+                print(dic)
+                print("HASH:"+aaa!.hash)
+
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(aaa?.hash as AnyObject)
+                }
+                
+                
+            } catch {
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+            }
+        }
+        
+        
+    }
+    
+    
+    // MARK:执行清算
+    @objc public func liquidateAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let privateKeyStr = dic["privateKey"]!
+                let walletAddress = dic["walletAddress"]!
+                let gasPrice = dic["gasPrice"]
+                let ETHValue = dic["ETHValue"]
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                web3obj.addKeystoreManager(keystoreManager)
+                
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt(ETHValue!, units: .wei)
+                options.from = EthereumAddress(wallet.address)
+                options.gasPrice = .manual(BigUInt(gasPrice!.nsstring.integerValue))
+                options.gasLimit = .automatic
+                
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.write("liquidate", parameters: [EthereumAddress(walletAddress)] as [AnyObject], extraData: Data(), transactionOptions: nil)
+
+                // 发起智能合约请求
+                let aaa  = try transfer?.send(password: password, transactionOptions: options)
+                print(dic)
+                print("HASH:"+aaa!.hash)
+
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(aaa?.hash as AnyObject)
+                }
+                
+                
+            } catch {
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+            }
+        }
+        
+        
+    }
+    
+    
+    // MARK:获取账户活期余额
+    @objc public func getBalancesAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let address = params
+                
+                // 合约地址
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                var options = TransactionOptions.defaultOptions
+                options.from = EthereumAddress(address as! String)
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.read("getBalances", parameters: [], extraData: Data(), transactionOptions: options)
+
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                
+                
+                
+                // 调整返回数据
+                var list = [String : [String]]()
+                for item in aaa.keys {
+                    
+                    if item == "balances" {
+
+                        let J : [NSObject] = aaa[item] as![NSObject]
+                        var K = [String]()
+
+                        for L in J{
+
+                            let S = String.init(format: "%@", L)
+                            K.append(S)
+                        }
+                        list.updateValue(K, forKey: item)
+                    } else if item == "addresses" {
+                        
+                        let array : [EthereumAddress] = aaa[item] as! [EthereumAddress]
+                        var _array : [String] = [String]()
+                        
+                        for A in array{
+                            
+                            _array.append(A.address)
+                            
+                        }
+                        
+                        list.updateValue(_array, forKey: item)
+                    }
+                   
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(list as AnyObject)
+                }
+                
+                
+            } catch {
+                
+                print(error)
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result([String : [String]]() as AnyObject)
+                    
+                }
+                
+            }
+        }
+    }
+    
+    
+    
+    // MARK:获取可清算用户
+    @objc public func getLiquidatableAccountsAction(result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                
+                // 合约地址
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let contract = web3obj.contract(self.abi, at: self.contractAdddress, abiVersion: 2)
+                let transfer = contract?.read("getLiquidatableAccounts", parameters: [], extraData: Data(), transactionOptions: nil)
+
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                
+                
+                
+                // 调整返回数据
+                var list = [String : [String]]()
+                for item in aaa.keys {
+                    
+                     if item == "0" {
+                        
+                        let array : [EthereumAddress] = aaa[item] as! [EthereumAddress]
+                        var _array : [String] = [String]()
+                        
+                        for A in array{
+                            
+                            _array.append(A.address)
+                            
+                        }
+                        
+                        list.updateValue(_array, forKey: "address")
+                    }
+                   
+                }
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(list as AnyObject)
+                }
+                
+                
+            } catch {
+                
+                print(error)
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result([String : [String]]() as AnyObject)
+                    
+                }
+                
+            }
+        }
+    }
+    
+    
+    
+    // MARK:======================================ERC20ABI========================================
+//    好的   我在重新给你理一下
+//    授权和查看授权都是对ERC20合约的操作，所以to地址都是erc20地址，适用于所有erc20合约
+//    授权合约的参数有两个第一个是DeiPool的地址第二个是授权的金额，代表的意思是调用者对DeiPool授权多少金额。
+//    查看授权的方法的参数也有两个，第一个是你要查看的用户的钱包地址，这个地址在你的app里面一般指的是用户自己的地址，第二个是DeiPool的地址，意义是查看用户给DeiPool授权了多少金额。
+    
+    // MARK:查看授权
+    @objc public func allowanceAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let address = dic["adddress"]
+                let erc20Adddress = dic["erc20Adddress"]!
+                
+                // 合约地址
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                var options = TransactionOptions.defaultOptions
+                options.from = EthereumAddress(address as! String)
+                let contract = web3obj.contract(self.ERC20ABI, at: EthereumAddress(erc20Adddress), abiVersion: 2)
+                let transfer = contract?.read("allowance", parameters: [options.from, self.contractAdddress] as [AnyObject], extraData: Data(), transactionOptions: options)
+
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                print(aaa);
+                
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(aaa as AnyObject)
+                }
+                
+                
+            } catch {
+                
+                print(error)
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result([] as AnyObject)
+                    
+                }
+                
+            }
+        }
+    }
+    
+
+//    好的   我在重新给你理一下
+//    授权和查看授权都是对ERC20合约的操作，所以to地址都是erc20地址，适用于所有erc20合约
+//    授权合约的参数有两个第一个是DeiPool的地址第二个是授权的金额，代表的意思是调用者对DeiPool授权多少金额。
+//    查看授权的方法的参数也有两个，第一个是你要查看的用户的钱包地址，这个地址在你的app里面一般指的是用户自己的地址，第二个是DeiPool的地址，意义是查看用户给DeiPool授权了多少金额。
+        
+    // MARK:授权合约
+    @objc public func approveAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let privateKeyStr = dic["privateKey"]!
+                let erc20Adddress = dic["erc20Adddress"]!
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                
+                // 加入管理者
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                web3obj.addKeystoreManager(keystoreManager)
+                
+                
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt("0", units: .eth)
+                options.from = EthereumAddress(wallet.address)
+                options.gasPrice = .automatic
+                options.gasLimit = .automatic
+                
+                let contract = web3obj.contract(self.ERC20ABI, at: EthereumAddress(erc20Adddress), abiVersion: 2)
+                let transfer = contract?.write("approve", parameters: [self.contractAdddress, Web3.Utils.parseToBigUInt("9999999999999999999999999", decimals: self.getWeiAction(coin: erc20Adddress))] as [AnyObject], extraData: Data(), transactionOptions: nil)
+                
+                
+                // 发起智能合约请求
+                let aaa  = try transfer?.send(password: password, transactionOptions: options)
+                print("HASH:"+aaa!.hash)
+
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(aaa?.hash as AnyObject)
+                }
+                
+                
+            } catch {
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+            }
+        }
+        
+        
+    }
+    
+    
+    
+    // MARK:=============================================钱包相关的合约=============================================
+    
+    // MARK:创建钱包
+    @objc public func createWalletAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let mmemonics = try! BIP39.generateMnemonics(bitsOfEntropy: 128)
+                
+                let seed = BIP39.seedFromMmemonics(mmemonics!)
+                let keystore = try! BIP32Keystore(seed: seed!, password: "123456")
+                let address = keystore?.addresses?.first?.address
+
+                let keystoreManager = KeystoreManager([keystore!])
+
+                let account = keystoreManager.addresses![0]
+
+                let privateKey = try! keystore?.UNSAFE_getPrivateKeyData(password: "123456", account: account)
+                let privateString = privateKey?.toHexString()
+                
+                
+                let dic = [
+                    "memonics" : mmemonics,
+                    "address" : address,
+                    "privateKey" : privateString
+                    ] as [String : Any]
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(dic as AnyObject)
+                }
+                
+            } catch {
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result([] as AnyObject)
+                }
+            }
+        }
+        
+    }
+    
+    // MARK:导入钱包【助记词】
+    @objc public func importWallet1Action(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+    
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let memonics = dic["memonics"]!
+                                
+                let seed = BIP39.seedFromMmemonics(memonics)
+                if seed == nil {
+
+                    DispatchQueue.main.async {
+                        
+                        // 主线程
+                        result("" as AnyObject)
+                    }
+                    return
+                }
+                
+                let keystore = try! BIP32Keystore(seed: seed!, password: "123456")
+                let address = keystore?.addresses?.first?.address
+
+                let keystoreManager = KeystoreManager([keystore!])
+
+                let account = keystoreManager.addresses![0]
+
+                let privateKey = try! keystore?.UNSAFE_getPrivateKeyData(password: "123456", account: account)
+                let privateString = privateKey?.toHexString()
+                
+                
+                let dic1 = [
+                    "memonics" : memonics,
+                    "address" : address,
+                    "privateKey" : privateString
+                    ] as [String : Any]
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(dic1 as AnyObject)
+                }
+                
+            } catch {
+                
+            
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result("" as AnyObject)
+                }
+            }
+        }
+       
+    }
+    
+    // MARK:导入钱包【私钥】
+    @objc public func importWallet2Action(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+    
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let privateKey = dic["privateKey"]!
+                
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKey.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                let dic1 = [
+                    "memonics" : "",
+                    "address" : address,
+                    "privateKey" : privateKey
+                    ] as [String : Any]
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(dic1 as AnyObject)
+                }
+                
+            } catch {
+                
+            
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result("" as AnyObject)
+                }
+            }
+        }
+       
+    }
+    
+    
+    // MARK:获取ETH余额
+    /// - Parameters:
+    ///   - params: 传入ETH钱包地址
+    ///   - result: 余额数组[ETH, DAI, USDT, USDC, TUSD, GUSD, FIN]
+    @objc public func getETHBalanceAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+    
+        
+        OperationQueue().addOperation {
+            var balances = [AnyObject]()
+            var temp = [String]()
+            do {
+            
+                let address = params as! [String]
+                for add in address {
+                    
+                    
+                    // 获取ETH余额
+                    let walletAddress = EthereumAddress(add)!
+                    let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                    let balanceResult = try web3obj.eth.getBalance(address: walletAddress)
+                    let balanceString = Web3.Utils.formatToEthereumUnits(balanceResult, toUnits: .wei, decimals: 6)!
+                    temp.append(balanceString)
+                    
+                    // CYC666
+                    // 获取代币余额  
+                    let tokens = [
+                        "0xdac17f958d2ee523a2206206994597c13d831ec7",   // USDT
+                        "0xe74b35425fe7e33ea190b149805baf31139a8290",   // QC
+                        "0xd1517663883e2acc154178fb194e80e8bbc29730",   // DIP
+                        "0x5a9C8c6406d341A16aa3010108026f45fc372168",   // ZB
+                        "0x75231F58b43240C9718Dd58B4967c5114342a86c",   // OKB
+                        "0x6f259637dcD74C767781E37Bc6133cd6A68aa161",   // HT
+                        "0xD0Bd12A8D5EBCA1E2FA46dA59F1993EC51C3d75c",   // BKK
+                        "0x4fabb145d64652a948d72533023f6e7a623c7c53",   // BUSD
+                        "0xdf574c24545e5ffecb9a659c229253d4111d87e1"    // HUSD
+                    ]
+                    
+
+                    
+                    for token in tokens {
+                        
+                       
+                        let walletAddress = EthereumAddress(add)!
+                        let exploredAddress = EthereumAddress(add)!
+                        let erc20ContractAddress = EthereumAddress(token)!
+                        let contract = web3obj.contract(Web3.Utils.erc20ABI, at: erc20ContractAddress, abiVersion: 2)!
+                        var options = TransactionOptions.defaultOptions
+                        options.from = walletAddress
+                        options.gasPrice = .automatic
+                        options.gasLimit = .automatic
+                        let method = "balanceOf"
+                        let tx = contract.read(
+                            method,
+                            parameters: [exploredAddress] as [AnyObject],
+                            extraData: Data(),
+                            transactionOptions: options)!
+                        
+                        do {
+                            let tokenBalance = try tx.call()   // CYC666
+                            let balanceBigUInt = tokenBalance["0"] as! BigUInt
+                            let balanceString = Web3.Utils.formatToEthereumUnits(balanceBigUInt, toUnits: .wei, decimals: 6)!
+                            
+                            temp.append(balanceString)
+                        } catch {
+                            
+                        }
+                    }
+                    
+                    balances.append(temp as AnyObject)
+                }
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(balances as AnyObject)
+                }
+            
+            } catch {
+            
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    balances.append(temp as AnyObject)
+                    result(balances as AnyObject)
+                }
+            }
+        }
+    }
+    
+
+    // MARK:获取Gas价格[平均]
+    @objc public func getGasPriceAction(result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                // 114000000000
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let price = try! web3obj.eth.getGasPrice()
+                let amount = String.init(format: "%ld", Int(price) / 1000000000)
+                
+                DispatchQueue.main.async {
+                    
+                    result(amount as AnyObject)
+                    
+                }
+                
+            } catch {
+                
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                    
+                    result(e.errorDescription as AnyObject)
+                    
+                }
+            }
+            
+        }
+        
+    }
+    
+    // MARK:ETH转账
+    @objc public func transferAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let privateKeyStr = dic["privateKey"]!
+                let toAddressStr = dic["toAddress"]!
+                let amountStr = dic["amount"]!
+                let gasPrice = dic["gasPrice"]
+                
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                web3obj.addKeystoreManager(keystoreManager)
+                
+                
+
+                // 交易
+                let value: String = amountStr
+                let walletAddress = EthereumAddress(wallet.address)!
+                let toAddress = EthereumAddress(toAddressStr)!
+                let contract = web3obj.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2)!
+                let amount = Web3.Utils.parseToBigUInt(value, units: .eth)
+                var options = TransactionOptions.defaultOptions
+                options.value = amount
+                options.from = walletAddress
+                options.gasPrice = .manual(BigUInt(gasPrice!.nsstring.integerValue))
+                options.gasLimit = .automatic
+
+//                var ooo = TransactionOptions.init()
+//                ooo.value = amount
+//                ooo.from = walletAddress
+//                ooo.gasPrice = .automatic
+//                ooo.gasLimit = .automatic
+
+                let tx = contract.write(
+                    "fallback",
+                    parameters: [AnyObject](),
+                    extraData: Data(),
+                    transactionOptions: options)!
+
+                let res = try tx.send(password: password, transactionOptions: options)
+                print(dic)
+                print(res.hash)
+
+                DispatchQueue.main.async {
+
+                    result(res.hash as AnyObject)
+
+                }
+                
+            } catch {
+                
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+            }
+
+        }
+        
+    }
+    
+    // MARK:获取交易详情 
+    @objc public func getTransactionAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            
+            let hashText: String = params as! String
+            
+            var temp = [String]()
+            do {
+                
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                let value = try web3obj.eth.getTransactionReceipt(hashText)
+                   
+                print(value)
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(value as AnyObject)
+                }
+                
+            } catch {
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result("" as AnyObject)
+                }
+            }
+        }
+    }
+    
+    // MARK:获取交易详情  // CYC666
+    @objc public func getTransactionAction2(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            
+            let hashText: String = params as! String
+            
+            var temp = [String]()
+            do {
+                
+                let web3obj = Web3.InfuraRinkebyWeb3()
+                let value : TransactionDetails = try web3obj.eth.getTransactionDetails(hashText)
+                   
+                
+                print(value)
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(value.transaction.data as AnyObject)
+                }
+                
+            } catch {
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result("" as AnyObject)
+                }
+            }
+        }
+    }
+    
+    // MARK:Test // CYC666
+    @objc public func transferAction2(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let web4 = Web3.InfuraRinkebyWeb3()
+                
+                let dic = params as! [String : String]
+                let tips = dic["tips"]!
+                let privateKeyStr = "0x36f5160f50b27778d13ec53bc24f090d7738b21e1d6b7b2d91fb2677d7806a1a"
+                let toAddressStr = "0xe72B4201E9E6a890B0eefB7163c85F478B6b3022"
+                let amountStr = "0.01"
+                
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                web4.addKeystoreManager(keystoreManager)
+
+                let extraData = tips.data(using: .utf8)
+                
+                // 交易
+                let value: String = amountStr
+                let walletAddress = EthereumAddress(wallet.address)!
+                let toAddress = EthereumAddress(toAddressStr)!
+                let contract = web4.contract(Web3.Utils.coldWalletABI, at: toAddress, abiVersion: 2)!
+                let amount = Web3.Utils.parseToBigUInt(value, units: .eth)
+                var options = TransactionOptions.defaultOptions
+                options.value = amount
+                options.from = walletAddress
+                options.gasPrice = .withMargin(0.01)
+                options.gasLimit = .withMargin(0.01)
+                let tx = contract.write(
+                    "fallback",
+                    parameters: [AnyObject](),
+                    extraData: extraData!,
+                    transactionOptions: options)!
+
+                let res = try tx.send(password: password, transactionOptions: options)
+//                print(res.hash)
+//                print(extraData)
+                
+               
+                
+            } catch {
+                
+             
+            }
+
+        }
+        
+    }
+    
+    
+    // MARK:ERC20转账
+    @objc public func transferTokenAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let privateKeyStr = dic["privateKey"]!
+                let toAddressStr = dic["toAddress"]!
+                let amountStr = dic["amount"]!
+                let tokenAddress = dic["tokenAddress"]!
+                let gasPrice = dic["gasPrice"]
+                
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+               
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                let web3obj = web3.init(provider: Web3HttpProvider.init(URL.init(string: self.pointNet)!)!)
+                web3obj.addKeystoreManager(keystoreManager)
+
+                
+                // 交易
+                let value: String = amountStr
+                let walletAddress = EthereumAddress(wallet.address)! // Your wallet address
+                let toAddress = EthereumAddress(toAddressStr)!
+                let erc20ContractAddress = EthereumAddress(tokenAddress, ignoreChecksum:true)!
+                let contract = web3obj.contract(Web3.Utils.erc20ABI, at: erc20ContractAddress, abiVersion: 2)!
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt("0", units: .eth)
+                options.from = walletAddress
+                options.gasPrice = .manual(BigUInt(gasPrice!.nsstring.integerValue))
+                options.gasLimit = .automatic
+                
+                let method = "transfer"
+                let tx = contract.write(
+                    method,
+                    parameters: [toAddress, Web3.Utils.parseToBigUInt(value, decimals: self.getWeiAction(coin: tokenAddress))] as [AnyObject],
+                    extraData: Data(),
+                    transactionOptions: options)!
+
+                
+                let res = try tx.send(password: password, transactionOptions: options)
+                print(dic)
+                print(res.hash)
+                
+                
+                
+                DispatchQueue.main.async {
+                                                  
+                    result(res.hash as AnyObject)
+
+                }
+                
+            } catch {
+                
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+
+            }
+
+        }
+        
+        
+    }
+    
+    
+    // MARK:======================================资金转换========================================
+    
+    // MARK:Kyer查看授权
+    @objc public func kyberAllowanceAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let address = dic["adddress"]
+                let erc20Adddress = dic["erc20Adddress"]!
+                // 合约地址
+                var options = TransactionOptions.defaultOptions
+                options.from = EthereumAddress(address as! String)
+                let contract = self.keyberWeb.contract(self.ERC20ABI, at: EthereumAddress(erc20Adddress), abiVersion: 2)
+                let transfer = contract?.read("allowance", parameters: [options.from, self.kyberAddress] as [AnyObject], extraData: Data(), transactionOptions: options)
+
+                // 发起智能合约请求
+                let aaa : [String : AnyObject] = try transfer?.call() as! [String : AnyObject]
+                print(aaa);
+                
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(aaa as AnyObject)
+                }
+                
+                
+            } catch {
+                
+                print(error)
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result([] as AnyObject)
+                    
+                }
+                
+            }
+        }
+    }
+    
+ 
+    // MARK:Kyer授权合约
+    @objc public func kyberApproveAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let privateKeyStr = dic["privateKey"]!
+                let erc20Adddress = dic["erc20Adddress"]!
+                
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                self.keyberWeb.addKeystoreManager(keystoreManager)
+                
+                
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt("0", units: .eth)
+                options.from = EthereumAddress(wallet.address)
+                options.gasPrice = .automatic
+                options.gasLimit = .automatic
+                
+                let contract = self.keyberWeb.contract(self.ERC20ABI, at: EthereumAddress(erc20Adddress), abiVersion: 2)
+                let transfer = contract?.write("approve", parameters: [self.kyberAddress, Web3.Utils.parseToBigUInt("9999999999999999999999999", units: .eth)] as [AnyObject], extraData: Data(), transactionOptions: nil)
+                
+                
+                // 发起智能合约请求
+                let aaa  = try transfer?.send(password: password, transactionOptions: options)
+                print("HASH:"+aaa!.hash)
+
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(aaa?.hash as AnyObject)
+                }
+                
+                
+            } catch {
+                print(error)
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result("" as AnyObject)
+                }
+            }
+        }
+        
+        
+    }
+    
+    // MARK:获取汇率
+    @objc public func kyberAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let fromAddress = dic["fromAddress"]!
+                let toAddress = dic["toAddress"]!
+                let amountStr = dic["amount"]!
+
+                
+                // 查询汇率
+                let contract = self.keyberWeb.contract(self.kyberABI, at: self.kyberAddress, abiVersion: 2)
+                let transfer = contract?.read("getExpectedRate",
+                                              parameters: [EthereumAddress(fromAddress),
+                                                           EthereumAddress(toAddress),
+                                                           Web3.Utils.parseToBigUInt(amountStr, decimals: self.getWeiAction(coin: fromAddress))] as[AnyObject],
+                                              extraData: Data(),
+                                              transactionOptions: nil)
+
+                // 发起智能合约请求
+                let aaa  = try transfer?.call()
+//                print(aaa)
+                
+                let slippageRate = String.init(format: "%@", aaa!["expectedRate"] as! CVarArg)  // slippageRate
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(slippageRate as AnyObject)
+                }
+                
+                
+            } catch {
+                DispatchQueue.main.async {
+                    
+                    print(error);
+                    // 主线程
+                    result("" as AnyObject)
+                }
+            }
+        }
+        
+    }
+    
+    
+    // MARK:swapEtherToToken
+    @objc public func swapEtherToTokenAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                
+                
+                
+                
+                let dic = params as! [String : String]
+                let slippageRate = dic["slippageRate"]!
+                let privateKeyStr = dic["privateKey"]!
+                let amountStr = dic["amount"]!
+                let tokenAddress = dic["tokenAddress"]!
+
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                self.keyberWeb.addKeystoreManager(keystoreManager)
+                
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt(amountStr, units: .eth)
+                options.from = EthereumAddress(address)
+                options.gasPrice = .automatic
+                options.gasLimit = .automatic
+
+                
+                let contract = self.keyberWeb.contract(self.kyberABI, at: self.kyberAddress, abiVersion: 2)
+
+                
+                // 转换
+                let trade = contract?.write("swapEtherToToken",
+                                            parameters: [EthereumAddress(tokenAddress),
+                                                         Web3.Utils.parseToBigUInt(slippageRate as String, units: .eth),
+                                                ] as[AnyObject],
+                                            extraData: Data(),
+                                            transactionOptions: nil)
+                let bbb = try trade?.send(password: password, transactionOptions: options)
+                print(bbb)
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(bbb?.hash as AnyObject)
+                }
+                
+                
+            } catch {
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+            }
+        }
+        
+    }
+    
+    // MARK:swapTokenToEther
+    @objc public func swapTokenToEtherAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let slippageRate = dic["slippageRate"]!
+                let privateKeyStr = dic["privateKey"]!
+                let amountStr = dic["amount"]!
+                let tokenAddress = dic["tokenAddress"]!
+
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                self.keyberWeb.addKeystoreManager(keystoreManager)
+                
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt("0", units: .eth)
+                options.from = EthereumAddress(address)
+                options.gasPrice = .automatic
+                options.gasLimit = .automatic
+
+                
+                let contract = self.keyberWeb.contract(self.kyberABI, at: self.kyberAddress, abiVersion: 2)
+                
+                
+                // 转换
+                let trade = contract?.write("swapTokenToEther",
+                                            parameters: [EthereumAddress(tokenAddress) as Any,
+                                                         Web3.Utils.parseToBigUInt(amountStr, decimals: self.getWeiAction(coin: tokenAddress)) as Any,        // srcAmount
+                                                         Web3.Utils.parseToBigUInt(slippageRate as String, units: .eth) as Any,     // minConversionRate
+                                                ] as[AnyObject],
+                                            extraData: Data(),
+                                            transactionOptions: options)
+                let bbb = try trade?.send(password: password, transactionOptions: options)
+                print(bbb as Any)
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(bbb?.hash as AnyObject)
+                }
+                
+                
+            } catch {
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+            }
+        }
+        
+    }
+    
+    // MARK:swapTokenToToken
+    @objc public func swapTokenToTokenAction(params : AnyObject, result : @escaping (AnyObject) -&gt; Void) {
+        
+        
+        OperationQueue().addOperation {
+            do {
+                
+                let dic = params as! [String : String]
+                let slippageRate = dic["slippageRate"]!
+                let privateKeyStr = dic["privateKey"]!
+                let amountStr = dic["amount"]!
+                let fromAddress = dic["fromAddress"]!
+                let toAddress = dic["toAddress"]!
+
+                // 获取钱包信息
+                let password = self.pw
+                let formattedKey = privateKeyStr.trimmingCharacters(in: .whitespacesAndNewlines)
+                let dataKey = Data.fromHex(formattedKey)!
+                let keystore = try! EthereumKeystoreV3(privateKey: dataKey, password: password)!
+                let name = "New Wallet"
+                let keyData = try! JSONEncoder().encode(keystore.keystoreParams)
+                let address = keystore.addresses!.first!.address
+                let wallet = Wallet(address: address, data: keyData, name: name, isHD: false)
+                
+                
+                // 加入管理者
+                let keystoreManager = KeystoreManager([EthereumKeystoreV3(wallet.data)!])
+                self.keyberWeb.addKeystoreManager(keystoreManager)
+                
+                var options = TransactionOptions.defaultOptions
+                options.value = Web3.Utils.parseToBigUInt("0", units: .eth)
+                options.from = EthereumAddress(address)
+                options.gasPrice = .automatic
+                options.gasLimit = .automatic
+
+                
+                let contract = self.keyberWeb.contract(self.kyberABI, at: self.kyberAddress, abiVersion: 2)
+
+                
+                // 转换
+                let trade = contract?.write("swapTokenToToken",
+                                            parameters: [EthereumAddress(fromAddress),
+                                                         Web3.Utils.parseToBigUInt(amountStr, decimals: self.getWeiAction(coin: fromAddress)),
+                                                         EthereumAddress(toAddress),
+                                                         Web3.Utils.parseToBigUInt(slippageRate as String, units: .eth),
+                                                ] as[AnyObject],
+                                            extraData: Data(),
+                                            transactionOptions: options)
+                let bbb = try trade?.send(password: password, transactionOptions: options)
+                print(bbb)
+                
+                DispatchQueue.main.async {
+                    
+                    // 主线程
+                    result(bbb?.hash as AnyObject)
+                }
+                
+                
+            } catch {
+                let e : Web3Error = error as! Web3Error
+                print(e.errorDescription)
+                DispatchQueue.main.async {
+                                                  
+                    result(e.errorDescription as AnyObject)
+
+                }
+            }
+        }
+        
+    }
+    
+    // MARK:======================================私有方法========================================
+    public func getWeiAction(coin : String) -&gt; Int{
+    
+        // CYC666 新增币种，此处要设置
+        let address = coin.uppercased()
+        if address == "0XEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEEE".uppercased() {
+            return 18
+        } else if address == "0x000000000000000000000000000000000000000E".uppercased() {
+            return 18
+        } else if address == "0xdac17f958d2ee523a2206206994597c13d831ec7".uppercased() {
+            return 6
+        } else if address == "0xe74b35425fe7e33ea190b149805baf31139a8290".uppercased() {
+            return 18
+        } else if address == "0xd1517663883e2acc154178fb194e80e8bbc29730".uppercased() {
+            return 18
+        } else if address == "0x5a9C8c6406d341A16aa3010108026f45fc372168".uppercased() {
+            return 18
+        } else if address == "0x75231F58b43240C9718Dd58B4967c5114342a86c".uppercased() {
+            return 18
+        } else if address == "0x6f259637dcD74C767781E37Bc6133cd6A68aa161".uppercased() {
+            return 18
+        } else if address == "0xB8c77482e45F1F44dE1745F52C74426C631bDD52".uppercased() {
+            return 18
+        } else if address == "0x2af5d2ad76741191d15dfe7bf6ac92d4bd912ca3".uppercased() {
+            return 18
+        } else if address == "0x70debcDAB2Ef20bE3d1dBFf6a845E9cCb6E46930".uppercased() {
+            return 8
+        } else if address == "0xD0Bd12A8D5EBCA1E2FA46dA59F1993EC51C3d75c".uppercased() {
+            return 18
+        } else if address == "0x4fabb145d64652a948d72533023f6e7a623c7c53".uppercased() {
+            return 18
+        } else if address == "0xdf574c24545e5ffecb9a659c229253d4111d87e1".uppercased() {
+            return 8
+        } else {
+            return 18
+        }
+    }
+
+}
+
+
+extension String {
+    
+    var nsstring:NSString {
+        return NSString.init(string: self)
+    }
+    
+}
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>79B64C63-39E3-4DDF-8A77-54B260E9F39C</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>PPPPPP</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let sheetView = UIAlertController(title: nil, message: "&lt;#title#&gt;", preferredStyle: UIAlertControllerStyle.actionSheet)
+        let cancelAction = UIAlertAction(title: "取消", style: UIAlertActionStyle.cancel, handler: nil)
+        let sureAction = UIAlertAction(title: "&lt;#action#&gt;", style: UIAlertActionStyle.default, handler: {
+            action in
+            
+        })
+        
+        
+        sheetView.addAction(sureAction)
+        sheetView.addAction(cancelAction)
+
+        self.present(sheetView, animated: true, completion: nil)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>DCCA7338-F178-4F59-B3E6-848228A5AE93</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift弹窗</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

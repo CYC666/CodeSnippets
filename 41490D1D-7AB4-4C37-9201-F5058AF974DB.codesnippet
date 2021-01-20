@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccpath</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>{
+            // Test 画贝塞尔曲线
+            UIView *view = [[UIView alloc] initWithFrame:CGRectMake(kSpaceSize, height + kSpaceSize, cScreenWidth - kSpaceSize*2, 300)];
+            view.backgroundColor = Content_Color;
+            [scrollView addSubview:view];
+            height = view.c_bottom;
+            
+            // 折线
+            CAShapeLayer *shapeLayer = [[CAShapeLayer alloc] init];
+            shapeLayer.frame = view.bounds;
+            shapeLayer.lineWidth = 1;
+            shapeLayer.fillColor = cClearColor.CGColor;
+            shapeLayer.strokeColor = [UIColor orangeColor].CGColor;
+            [view.layer addSublayer:shapeLayer];
+            
+            CGPoint point1 = CGPointMake(80, 100);      // 起点
+            CGPoint point2 = CGPointMake(160, 150);     // 控制点
+            CGPoint point3 = CGPointMake(240, 100);     // 终点
+            UIBezierPath *path = [[UIBezierPath alloc] init];
+            [path moveToPoint:point1];
+            [path addQuadCurveToPoint:point3 controlPoint:point2];
+            shapeLayer.path = path.CGPath;
+            
+            // 添加动画
+            CABasicAnimation *animal = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+            animal.fromValue = @0;
+            animal.toValue = @1;
+            animal.duration = 10;
+            [shapeLayer addAnimation:animal forKey:@""];
+        }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>41490D1D-7AB4-4C37-9201-F5058AF974DB</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>贝塞尔曲线</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

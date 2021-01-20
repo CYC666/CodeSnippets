@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccmain</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>dispatch_group_t group = dispatch_group_create();
+    dispatch_group_async(group, dispatch_get_global_queue(0,0), ^{
+        // 并行执行的线程一
+    });
+    dispatch_group_async(group, dispatch_get_global_queue(0,0), ^{
+        // 并行执行的线程二
+    });
+    dispatch_group_notify(group, dispatch_get_global_queue(0,0), ^{
+        // 上面的线程走完成后，最后通知走次block，保证这部分代码最后执行
+    });</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>EF83D52D-AC14-4E2B-917C-5979FB14CA3B</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>多线程多任务汇总</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

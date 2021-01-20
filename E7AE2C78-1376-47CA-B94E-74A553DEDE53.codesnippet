@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccmain</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 1.创建队列
+NSOperationQueue *queue = [[NSOperationQueue alloc] init];  // 子线程
+// NSOperationQueue *queue = [NSOperationQueue mainQueue];  // 主线程
+
+// 2.创建操作
+NSBlockOperation *op1 = [NSBlockOperation blockOperationWithBlock:^{
+    
+}];
+NSBlockOperation *op2 = [NSBlockOperation blockOperationWithBlock:^{
+    
+}];
+
+// 3.添加依赖
+[op2 addDependency:op1]; // 让op2 依赖于 op1，则先执行op1，在执行op2
+
+// 4.添加操作到队列中
+[queue addOperation:op1];
+[queue addOperation:op2];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>E7AE2C78-1376-47CA-B94E-74A553DEDE53</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>添加线程依赖</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

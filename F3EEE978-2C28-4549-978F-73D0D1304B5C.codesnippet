@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccanimal</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let animal = CABasicAnimation.init(keyPath: "transform.scale")
+        animal.timingFunction = CAMediaTimingFunction.init(name: CAMediaTimingFunctionName.easeInEaseOut)
+        animal.duration = 0.1
+        animal.repeatCount = 1
+        animal.autoreverses = true
+        animal.fromValue = 0.7
+        animal.toValue = 1.1
+        
+        let tabbarButton = viewList[index]
+        tabbarButton.layer.add(animal, forKey: nil)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>F3EEE978-2C28-4549-978F-73D0D1304B5C</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>swift添加动画CABasicAnimation</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

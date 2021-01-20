@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccplayer</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSString *sysPath=[[NSBundle mainBundle] pathForResource:@"123.wav" ofType:nil];
+
+                NSURL *sysUrl=[NSURL fileURLWithPath:sysPath];
+
+                //2、注册声音成为系统声音(__bridge桥接  让ARC管理CF框架的内存释放)  CFArrayRef --&gt;NSArray  CFStringRef --&gt;NSString
+
+                SystemSoundID soundID; //标识符，全局变量
+
+                AudioServicesCreateSystemSoundID((__bridge CFURLRef)sysUrl, &amp;soundID);
+
+                //3、播放系统声音
+
+                AudioServicesPlaySystemSound(soundID);
+
+                //4、播放震动只能真机演示
+
+                AudioServicesPlaySystemSound(kSystemSoundID_Vibrate);
+
+                //5、暂停系统声音  还可以继续播放
+
+                AudioServicesDisposeSystemSoundID(soundID);
+
+                //6、完全停止系统声音
+
+                AudioServicesRemoveSystemSoundCompletion(soundID);</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>AB5A0A44-3760-46D5-8900-9C64C37BF7B7</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>播放系统声音</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

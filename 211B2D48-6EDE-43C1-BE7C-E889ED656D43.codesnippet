@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccanimal</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 添加动画 strokeEnd strokeStart lineWidth
+CABasicAnimation *animal = [CABasicAnimation animationWithKeyPath:@"strokeEnd"];
+animal.fromValue = @0;
+animal.toValue = @1;
+animal.duration = 10;
+[shapeLayer addAnimation:animal forKey:@""];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>211B2D48-6EDE-43C1-BE7C-E889ED656D43</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>给layer添加动画</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

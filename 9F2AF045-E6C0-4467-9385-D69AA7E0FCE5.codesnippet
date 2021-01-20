@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSDictionary *dic = @{
+                          @"userId" : kUserInfo.user_id
+                          };
+    
+    SHOW_SVP
+    [CNetwork JAVA_GET:dic method:@"friends/getAllFriends" enable:YES success:^(id  _Nonnull obj) {
+        
+        // 先储存，再回调
+        NSString *code = [NSString stringWithFormat:@"%@", obj[@"code"]];
+        if ([code isEqualToString:@"200"]) {
+            
+            NSMutableArray *friends = [NSMutableArray array];
+            NSArray *list = obj[@"data"];
+            for (NSDictionary *dic in list) {
+                IMUserInfo *model = [IMUserInfo mj_objectWithKeyValues:dic];
+                
+                [friends addObject:model];
+            }
+            
+            [[RCDataBaseManager shareInstance] clearFriendsData];
+            
+            
+            if (friends.count &gt; 0) {
+                
+                [[RCDataBaseManager shareInstance] insertFriendListToDB:friends complete:^(BOOL result) {
+                    
+                }];
+                
+            }
+            
+            
+        } else {
+            
+            [[RCDataBaseManager shareInstance] clearFriendsData];
+            [CNetwork showErrorWithCode:code];
+            
+        }
+        
+        
+    } failse:^(id  _Nonnull obj) {
+        
+        SHOW_ERROR(RCDLocalizedString(@"network_can_not_use_please_check"))
+        
+    }];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>9F2AF045-E6C0-4467-9385-D69AA7E0FCE5</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>My Code Snippet</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

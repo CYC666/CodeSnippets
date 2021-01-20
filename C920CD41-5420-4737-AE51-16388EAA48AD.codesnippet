@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cccollectionView</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>ClassImplementation</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// MARK:======================================代理方法========================================
+    public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -&gt; Int {
+        return titleArray.count
+    }
+    
+    public func numberOfSections(in collectionView: UICollectionView) -&gt; Int {
+        return 1
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -&gt; UICollectionViewCell {
+    
+        let cell : LittlePlayerCell = collectionView.dequeueReusableCell(withReuseIdentifier: "LittlePlayerCell", for: indexPath) as! LittlePlayerCell
+        
+        // 图片
+        cell.iconImageView.image = UIImage(named: titleArray[indexPath.row])
+        
+        // 标题
+        cell.nameLabel.text = titleArray[indexPath.row]
+        
+        return cell
+    
+    }
+    
+    public func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+        
+        let cell : LittlePlayerCell = collectionView.cellForItem(at: indexPath) as! LittlePlayerCell
+        
+        UIView.animate(withDuration: 0.15, animations: { 
+            cell.transform = CGAffineTransform.init(scaleX: 0.9, y: 0.9)
+        }) { (true) in
+            UIView.animate(withDuration: 0.2, animations: { 
+                cell.transform = CGAffineTransform.init(scaleX: 1, y: 1)
+            })
+        }
+        
+        if cell.nameLabel.text == "取色板" {
+            let ctrl = SelectColorViewController()
+            ctrl.delegate = self
+            navigationController?.pushViewController(ctrl, animated: true)
+            
+        } else if cell.nameLabel.text == "城市列表" {
+            let ctrl = CityListViewController()
+            navigationController?.pushViewController(ctrl, animated: true)
+            
+        }
+        
+        
+    }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>C920CD41-5420-4737-AE51-16388EAA48AD</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift 集合控制器</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

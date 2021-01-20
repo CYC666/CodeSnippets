@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cclogin</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//获取当前时间
+            NSString *nowTime = [SmallFunctionTool transitionDateToString:[NSDate date]];
+            NSString *tel = [EncryptForInterface encryptWithText:_field1.text];
+            NSUserDefaults *userDefaults = [NSUserDefaults standardUserDefaults];
+            [userDefaults setObject:nowTime forKey:@"LoginDate"];
+            [userDefaults setObject:tel forKey:@"LoginTel"];
+            [userDefaults synchronize]; //立即同步</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>13E251E2-284C-4055-9D96-BBAB81AF0568</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>设置登录用户信息</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

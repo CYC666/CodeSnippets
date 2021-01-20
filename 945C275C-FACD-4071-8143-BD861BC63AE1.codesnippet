@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccfield</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>NSString *text = _field.placeholder;
+NSMutableAttributedString *string = [[NSMutableAttributedString alloc] initWithString:text];
+[string addAttribute:NSForegroundColorAttributeName value:Label_Color_C range:NSMakeRange(0, text.length)];
+[string addAttribute:NSFontAttributeName value:PingFangSC(13) range:NSMakeRange(0, text.length)];
+_field.attributedPlaceholder = string;</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>945C275C-FACD-4071-8143-BD861BC63AE1</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>适配iOS13+的FieldHolder</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

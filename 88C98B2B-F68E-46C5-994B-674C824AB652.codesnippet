@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccrefresh</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>CodeBlock</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>_listTableView.mj_header = [MJRefreshNormalHeader headerWithRefreshingBlock:^{
+    
+    [self loadListAction:NO];
+    
+    [_listTableView.mj_header endRefreshing];
+}];
+
+
+_listTableView.mj_footer = [MJRefreshBackNormalFooter footerWithRefreshingBlock:^{
+    
+    [self loadListAction:YES];
+    
+    
+}];
+
+[self loadListAction:NO];</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>88C98B2B-F68E-46C5-994B-674C824AB652</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetTitle</key>
+	<string>上拉加载下拉刷新</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

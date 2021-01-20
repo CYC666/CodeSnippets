@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cckeyboard</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>#pragma mark - 键盘消息
+- (void)keyBoardWillShowNotification:(NSNotification *)notifi {
+
+    CGRect rect = [[notifi.userInfo objectForKey:UIKeyboardFrameEndUserInfoKey] CGRectValue];
+    inputView.transform = CGAffineTransformMakeTranslation(0, -rect.size.height + (TabBar_Height - 49));
+    
+}
+
+- (void)keyBoardNotification:(NSNotification *)notifi {
+    
+    inputView.transform = CGAffineTransformMakeTranslation(0, 0);
+    
+    
+}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>E6BFC8DD-8693-43B8-8A81-44F7D85C0856</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>键盘消息</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

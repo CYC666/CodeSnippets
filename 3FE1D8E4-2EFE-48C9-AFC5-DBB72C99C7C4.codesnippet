@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>cctextview</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>    func textViewShouldBeginEditing(_ textView: UITextView) -&gt; Bool {
+        
+        self.label1?.isHidden = true
+        return true
+    }
+
+    func textViewShouldEndEditing(_ textView: UITextView) -&gt; Bool {
+        
+        if textView.text.count &gt; 0 {
+            self.label1?.isHidden = true
+        } else {
+            self.label1?.isHidden = false
+        }
+        return true
+    }</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>3FE1D8E4-2EFE-48C9-AFC5-DBB72C99C7C4</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift 控制TextView的占位符</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
