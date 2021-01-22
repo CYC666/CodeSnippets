@@ -9,7 +9,7 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>DispatchQueue.main.asyncAfter(deadline: .now() + 1.5) {
+	<string>DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
             
             
         }</string>
