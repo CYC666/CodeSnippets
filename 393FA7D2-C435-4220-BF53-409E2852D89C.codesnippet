@@ -9,7 +9,7 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>&lt;#btn#&gt;.addTarget(self, action: #selector(selectTypeAction(btn:)), for: .touchUpInside)</string>
+	<string>btn.addTarget(self, action: #selector(button2Action(btn:)), for: .touchUpInside)</string>
 	<key>IDECodeSnippetIdentifier</key>
 	<string>393FA7D2-C435-4220-BF53-409E2852D89C</string>
 	<key>IDECodeSnippetLanguage</key>

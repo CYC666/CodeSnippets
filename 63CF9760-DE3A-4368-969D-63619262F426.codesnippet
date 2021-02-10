@@ -1,0 +1,342 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string></string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>//
+//  InvateVC5.swift
+//  DQEXProject
+//
+//  Created by CYC on 2021/1/29.
+//
+
+import UIKit
+
+
+
+class InvateVC5: BaseViewController {
+    
+    var dataList = [MyFriendListModel]()
+    var scrollView: UIScrollView?
+    let BW = CGFloat(300)           // 按钮的宽度
+    let BH = CGFloat(30)            // 按钮的高度
+    var height = CGFloat(0.0)       // 按钮的整体高度，用于控制滑动视图的高度
+    let SPACE = CGFloat(30)         // 左端的均分宽度
+    var MAXWidth = CGFloat(0.0)     // 记录按钮的最右侧最大值，用于控制滑动视图的宽度
+    var pointList = [CGRect]()      // 记录按钮的锚点，用于画虚线    x,y表示父级的位置     w,h表示自己的位置
+
+    // MARK:======================================生命周期========================================
+    override func viewDidLoad() {
+        super.viewDidLoad()
+        
+        self.titleLabel?.text = "团队总人数"
+        self.view.backgroundColor = kBGColor
+        self.creatUIAction()
+        self.loadDataAction()
+    }
+    
+    func creatUIAction() {
+        
+        let scrollView = UIScrollView.init(frame: CGRect.init(x: 0, y: kNavHeight, width: kScreenWidth, height: kScreenHeight - kNavHeight))
+        scrollView.alwaysBounceVertical = true
+        scrollView.alwaysBounceHorizontal = true
+        self.view.addSubview(scrollView)
+        self.scrollView = scrollView
+        
+        
+    }
+    
+    // MARK:更新UI
+    @objc func updateUIAction() {
+        
+        self.scrollView?.removeAllSubviews()
+        self.height = CGFloat(0.0)
+        self.MAXWidth = CGFloat(0.0)
+        self.pointList.removeAll()
+
+        if true {
+            
+            let text = String.init(format: " %@(直推人数%@，团队人数%@)", (kUserInfo.phone)!, (kUserInfo.teamInviteDirect)!, (kUserInfo.teamInviteCount)!)
+            let btn = UIButton.init(frame: CGRect.init(x: kSpaceSize, y: self.height, width: self.BW, height: self.BH))
+            btn.contentHorizontalAlignment = .left
+            btn.setTitle(text, for: .normal)
+            btn.setTitleColor(kLabelColor1, for: .normal)
+            btn.titleLabel?.font = kRFont(15)
+            btn.backgroundColor = kBGColor
+            self.scrollView?.addSubview(btn)
+            height = btn.c_bottom()
+            self.pointList.append(CGRect.init(x: btn.c_left() + 10, y: btn.c_centerY(), width: btn.c_left() + 10, height: btn.c_centerY()))
+            
+            self.MAXWidth = max(self.MAXWidth, btn.c_right())
+        }
+        
+        if true {
+            
+            // 画按钮
+            self.creatListAction(list: self.dataList, startX: kSpaceSize + self.SPACE, superPoint: CGPoint.init(x: kSpaceSize, y: self.BH/2.0))
+            
+            // 画虚线
+            self.creatLineAction()
+        }
+        
+        self.scrollView?.contentSize = CGSize.init(width: CGFloat(self.MAXWidth), height: CGFloat(height + 50))
+        
+    }
+    
+    // MARK:画按钮
+    func creatListAction(list: [MyFriendListModel], startX: CGFloat, superPoint: CGPoint) {
+        
+        for model in list {
+            
+            let text = String.init(format: " %@(直推人数%@，团队人数%@)", (model.phone)!, (model.teamInviteDirect)!, (model.teamInviteCount)!)
+            
+            let btn = InvateVC5Button.init(frame: CGRect.init(x: startX, y: self.height, width: self.BW, height: self.BH))
+            btn.addTarget(self, action: #selector(button1Action(btn:)), for: .touchUpInside)
+            btn.contentHorizontalAlignment = .left
+            btn.setTitleColor(kLabelColor1, for: .normal)
+            btn.titleLabel?.font = kRFont(15)
+            btn.backgroundColor = kBGColor
+            btn.model = model
+            self.scrollView?.addSubview(btn)
+            self.height = btn.c_bottom()
+            self.MAXWidth = max(self.MAXWidth, btn.c_right())
+            self.pointList.append(CGRect.init(x: superPoint.x + 10, y: superPoint.y, width: btn.c_left() + 10, height: btn.c_centerY()))
+            
+            if (model.teamInviteCount?.nsstring.intValue)! &gt; 0 {
+                
+                var image: UIImage?
+                if model.teamList.count &gt; 0 {
+                    image = UIImage.init(named: "79")
+                } else {
+                    image = UIImage.init(named: "78")
+                }
+                
+                let str = NSMutableAttributedString.init(string: text)
+                str.addAttribute(.foregroundColor, value: kLabelColor1, range: NSRange.init(location: 0, length: str.length))
+                let att = NSTextAttachment.init()
+                att.image = image
+                att.bounds = CGRect.init(x: 0, y: -5, width: 20, height: 20)
+                str.insert(NSAttributedString.init(attachment: att), at: 0)
+                btn.setAttributedTitle(str, for: .normal)
+            } else {
+                btn.setTitle(text, for: .normal)
+            }
+            
+            self.creatListAction(list: model.teamList, startX: btn.c_left() + self.SPACE, superPoint: CGPoint.init(x: btn.c_left(), y: btn.c_centerY()))
+            
+        }
+    }
+    
+    // MARK:画虚线
+    func creatLineAction() {
+        
+        // x,y表示父级的位置     w,h表示自己的位置
+        for rect in self.pointList {
+            
+            // 父级
+            var subRectList = [CGRect]()
+            for subRect in self.pointList {
+                
+                // 子级
+                if subRect.origin.x == rect.size.width &amp;&amp; subRect.origin.y == rect.size.height{
+                    
+                    subRectList.append(subRect);
+                }
+            }
+            
+            if !subRectList.isEmpty {
+                
+                // 开始画虚线--横
+                for index in 0..&lt;subRectList.count {
+                    
+                    let model = subRectList[index]
+                    let lineH = UIView.init(frame: CGRect.init(x: model.origin.x, y: model.size.height, width: model.size.width - model.origin.x, height: kLineSize))
+                    self.scrollView?.insertSubview(lineH, at: 0)    // 遮住部分线条
+                    
+                    if true {
+                        
+                        let shapeLayer = CAShapeLayer.init()
+                        shapeLayer.bounds = lineH.bounds
+                        shapeLayer.position = CGPoint.init(x: lineH.c_width()/2.0, y: lineH.c_height()/2.0)
+                        shapeLayer.fillColor = UIColor.clear.cgColor
+                        shapeLayer.strokeColor = kLabelColor3.cgColor
+                        shapeLayer.lineWidth = 1
+                        shapeLayer.lineJoin = .round
+                        shapeLayer.lineDashPattern = [2,2]
+                        let path = CGMutablePath()
+                        path.move(to: CGPoint.init(x: 0, y: lineH.c_height()/2.0))
+                        path.addLine(to: CGPoint.init(x: lineH.c_width(), y: lineH.c_height()/2.0))
+                        shapeLayer.path = path
+                        lineH.layer.addSublayer(shapeLayer)
+                    }
+                    
+                    // 最后一个--竖
+                    if index == subRectList.count - 1 {
+                        
+                        let lineV = UIView.init(frame: CGRect.init(x: model.origin.x, y: model.origin.y, width: kLineSize, height: model.size.height - model.origin.y))
+                        self.scrollView?.insertSubview(lineV, at: 0)
+                        
+                        if true {
+                            
+                            let shapeLayer = CAShapeLayer.init()
+                            shapeLayer.bounds = lineV.bounds
+                            shapeLayer.position = CGPoint.init(x: lineV.c_width()/2.0, y: lineV.c_height()/2.0)
+                            shapeLayer.fillColor = UIColor.clear.cgColor
+                            shapeLayer.strokeColor = kLabelColor3.cgColor
+                            shapeLayer.lineWidth = 1
+                            shapeLayer.lineJoin = .round
+                            shapeLayer.lineDashPattern = [2,2]
+                            let path = CGMutablePath()
+                            path.move(to: CGPoint.init(x: lineV.c_width()/2.0, y: 0))
+                            path.addLine(to: CGPoint.init(x: lineV.c_width()/2.0, y: lineV.c_height()))
+                            shapeLayer.path = path
+                            lineV.layer.addSublayer(shapeLayer)
+                        }
+                    }
+                }
+            }
+        }
+    }
+    
+    // MARK:======================================点击响应========================================
+    
+    // MARK:点击
+    @objc func button1Action(btn: InvateVC5Button) {
+        
+        if (btn.model?.teamList.count)! &gt; 0 {
+            
+            // 收起
+            btn.model?.teamList.removeAll()
+            self.updateUIAction()
+            
+        } else {
+            
+            // 展开
+            self.loadFriendDataAction(model: btn.model!)
+        }
+    
+    }
+    
+    // MARK:======================================网络请求========================================
+    
+    // MARK:获取列表数据
+    @objc func loadDataAction() {
+        
+//        for _ in 0..&lt;10 {
+//
+//            let model = MyFriendListModel()
+//            model.phone = "13700009999"
+//            model.teamInviteCount = "5"
+//            model.teamInviteDirect = "2"
+//            model.createdAt = "127386123"
+//            self.dataList.append(model)
+//        }
+//        self.updateUIAction()
+        
+        
+        let method = "v1/user/invite/team/index"
+        let dic = ["page" : "1",
+                   "page_length" : "100"   // CYC666
+        ]
+
+        IndicatorView.show(self.view)
+        kNWork.requstDatas(.get, urlString: method, parames: dic) { (obj) in
+
+            IndicatorView.hide(self.view)
+            let resposeModel = ResposeModel.deserialize(from: obj.dictionaryValue)
+            if resposeModel?.code == "200" {
+
+                let model = MyFriendListSModel.deserialize(from: resposeModel?.data)
+                self.dataList.append(contentsOf: (model?.list)!)
+ 
+
+            } else {
+                ToastManager.makeToast((resposeModel?.message)!)
+            }
+
+            self.updateUIAction()
+
+        } falseBack: { () in
+            IndicatorView.hide(self.view)
+            ToastManager.makeToast("请检查网络")
+            self.updateUIAction()
+        }
+    }
+    
+    // MARK:获取好友的团队数据
+    func loadFriendDataAction(model: MyFriendListModel) {
+        
+//        for _ in 0..&lt;10 {
+//
+//            let friend = MyFriendListModel()
+//            friend.phone = "13703309999"
+//            friend.teamInviteCount = "6"
+//            friend.teamInviteDirect = "4"
+//            friend.createdAt = "127386123"
+//            model.teamList.append(friend)
+//        }
+//        self.updateUIAction()
+        
+        let method = "v1/user/invite/team/line"
+        let dic = ["user_id" : (model.uid)!
+        ]
+
+        IndicatorView.show(self.view)
+        kNWork.requstDatas(.get, urlString: method, parames: dic) { (obj) in
+
+            IndicatorView.hide(self.view)
+            let resposeModel = ResposeModel.deserialize(from: obj.dictionaryValue)
+            if resposeModel?.code == "200" {
+
+                let modelS = MyFriendListSModel.deserialize(from: resposeModel?.data)
+                model.teamList.append(contentsOf: (modelS?.list)!)
+  
+
+            } else {
+                ToastManager.makeToast((resposeModel?.message)!)
+            }
+            self.updateUIAction()
+
+        } falseBack: { () in
+            IndicatorView.hide(self.view)
+            ToastManager.makeToast("请检查网络")
+            self.updateUIAction()
+        }
+    }
+    
+    // MARK:======================================代理方法========================================
+    
+    
+    
+    
+    
+    
+
+
+}
+
+
+class InvateVC5Button: UIButton {
+    var model: MyFriendListModel?
+}
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>63CF9760-DE3A-4368-969D-63619262F426</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift 多层级控制器</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

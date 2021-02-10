@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string></string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+
+//
+//  KlineView.swift
+//  XSHLineChart
+//
+//  Created by 宋莹 on 2019/6/28.
+//  Copyright © 2019 Abner. All rights reserved.
+//
+
+//self.chartView = KlineView.init(frame: CGRect.init(x: self.leftWidth, y: lab2.c_bottom(), width: self.BW*5, height: BH*7))
+//self.chartView.creatLineChart(XDatasArr: xList, YDatasArr: yList)
+//self.chartView.setColor(SELECT_COLOR)
+//self.addSubview(self.chartView)
+
+import UIKit
+
+class KlineView: UIView {
+    
+    var granLayer = CAGradientLayer()//渐变色
+    
+    var maskLayer = CAShapeLayer()//填充色
+    
+    var shapeLayer = CAShapeLayer()//折线
+
+    override init(frame: CGRect) {
+        super.init(frame: frame)
+        self.backgroundColor = UIColor.clear
+        initLayer()
+        addLayer()
+    }
+    
+    func initLayer(){
+        granLayer = {//渐变色
+            let tempGranLayer = CAGradientLayer()
+            tempGranLayer.startPoint = CGPoint(x: 0, y: 0)
+            tempGranLayer.endPoint = CGPoint(x: 0, y: 1)
+            tempGranLayer.locations = [0.0,1.0]
+            tempGranLayer.frame = bounds
+            return tempGranLayer
+        }()
+        maskLayer = {//填充色
+            let tempMask = CAShapeLayer()
+            tempMask.frame = granLayer.bounds
+            return tempMask
+        }()
+        shapeLayer = {//折线
+            let tempLayer = CAShapeLayer()
+            tempLayer.lineWidth = 0.5
+            tempLayer.fillColor = UIColor.clear.cgColor
+            tempLayer.frame = bounds
+            return tempLayer
+        }()
+    }
+    
+    func addLayer(){
+        layer.addSublayer(granLayer)
+        granLayer.mask = maskLayer
+        layer.addSublayer(shapeLayer)
+    }
+    
+    func setLayerFrame(){
+        granLayer.frame = bounds
+        shapeLayer.frame = bounds
+        maskLayer.frame = bounds
+    }
+    
+    func setColor(_ color : UIColor){
+        granLayer.colors = [color.cgColor , kHexColor(0xFFFFFF).cgColor]
+        maskLayer.fillColor = color.withAlphaComponent(0.5).cgColor
+        shapeLayer.strokeColor = color.cgColor
+    }
+    
+    required init?(coder aDecoder: NSCoder) {
+        super.init(coder: aDecoder)
+//        fatalError("init(coder:) has not been implemented")
+    }
+    
+}
+
+/** 计算绘图 */
+extension KlineView{
+    func creatLineChart(XDatasArr:[CGFloat],YDatasArr:[CGFloat]) {
+        
+        if XDatasArr.count == 0 || YDatasArr.count == 0 {
+            return
+        }
+        //1 移除旧视图
+        self.layer.sublayers?.forEach({ (sublayer) in
+            sublayer.removeFromSuperlayer()
+        })
+        
+        //添加新视图
+        initLayer()
+        addLayer()
+        setColor(kHexColor(0x46BD2E))
+        
+        //2 计算
+        var minY : CGFloat = CGFloat(MAXFLOAT)
+        var maxY : CGFloat = 0
+        for i in 0..&lt;YDatasArr.count {
+            if minY &gt;= YDatasArr[i]{
+                minY = YDatasArr[i]
+            }
+            if maxY &lt;= YDatasArr[i]{
+                maxY = YDatasArr[i]
+            }
+        }
+        let YMaxHeight = maxY - minY
+        if  YMaxHeight &lt;= 0{
+        
+            // 在中间画一条线吧，好看些
+            
+            let b = UIBezierPath.init()
+            b.move(to: CGPoint(x: 0, y: self.c_height()/2.0))
+            b.addLine(to: CGPoint(x: self.c_width(), y: self.c_height()/2.0))
+            self.shapeLayer.path = b.cgPath
+            
+            b.addLine(to: CGPoint(x: self.c_width(), y: self.c_height()))
+            b.addLine(to: CGPoint(x: 0, y: self.c_height()))
+            self.maskLayer.path = b.cgPath
+            
+            return
+        }
+        let XMargin:CGFloat = self.frame.size.width/CGFloat(XDatasArr.count - 1)
+        let YMargin:CGFloat = self.frame.size.height/YMaxHeight
+        
+        //3 画线
+        let bezierPath = UIBezierPath.init()
+        bezierPath.move(to: CGPoint(x: 0, y: (maxY - YDatasArr[0])*YMargin))
+        for i in 0...XDatasArr.count-1 {
+            let addPoint = CGPoint(x: CGFloat(i)*XMargin, y: (maxY - YDatasArr[i])*YMargin)
+            bezierPath.addLine(to: addPoint)
+        }
+        self.shapeLayer.path = bezierPath.cgPath
+        
+        //4 填色
+        bezierPath.addLine(to: CGPoint(x: CGFloat(XDatasArr.count-1)*XMargin, y: self.frame.size.height))
+        bezierPath.addLine(to: CGPoint(x: 0, y: self.frame.size.height))
+        self.maskLayer.path = bezierPath.cgPath
+        
+        
+        
+    }
+}
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>7BEEA192-18C0-4BE3-98BF-2C6D9C07D532</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>画K线</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

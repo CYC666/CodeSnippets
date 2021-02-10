@@ -21,7 +21,9 @@
 	<key>IDECodeSnippetIdentifier</key>
 	<string>F33C033F-F927-4499-A832-B9054187BBA0</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
 	<key>IDECodeSnippetTitle</key>
 	<string>视图已经消失</string>
 	<key>IDECodeSnippetUserSnippet</key>

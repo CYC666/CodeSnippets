@@ -20,7 +20,9 @@
 	<key>IDECodeSnippetIdentifier</key>
 	<string>BBA6A317-F697-4EE1-879F-6A37C7E2F83A</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
 	<key>IDECodeSnippetTitle</key>
 	<string>视图已经显示</string>
 	<key>IDECodeSnippetUserSnippet</key>

@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccshape</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let viewDash = UIView.init(frame: CGRect.init(x: viewChar.c_left(), y:lab1.c_bottom() + BH*CGFloat(index), width: viewChar.c_width(), height: kLineSize))
+                viewS.insertSubview(viewDash, at: 0)
+                
+                let shapeLayer = CAShapeLayer.init()
+                shapeLayer.bounds = viewDash.bounds
+                shapeLayer.position = CGPoint.init(x: viewDash.c_width()/2.0, y: viewDash.c_height()/2.0)
+                shapeLayer.fillColor = UIColor.clear.cgColor
+                shapeLayer.strokeColor = kLineColor.cgColor
+                shapeLayer.lineWidth = kLineSize
+                shapeLayer.lineJoin = .round
+                shapeLayer.lineDashPattern = [5,5]
+                let path = CGMutablePath()
+                path.move(to: CGPoint.init(x: 0, y: viewDash.c_height()/2.0))
+                path.addLine(to: CGPoint.init(x: viewChar.c_width(), y: viewDash.c_height()/2.0))
+                shapeLayer.path = path
+                viewDash.layer.addSublayer(shapeLayer)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>F0297A2B-C66C-4EFB-A0F9-20E80E07D9B5</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift 画虚线</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

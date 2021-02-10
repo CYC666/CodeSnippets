@@ -3,24 +3,21 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>ccdate</string>
+	<string>cccode</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>let date = Date.init(timeIntervalSince1970: (model.createdAt?.nsstring.doubleValue)!)
-            let format = DateFormatter.init()
-            format.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let dateText = format.string(from: date)</string>
+	<string>icon.image = QRCodeTool.setupQRCodeImage(kUserInfo.inviteurl!, image: nil)</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>30519A5D-20B0-4E51-AF81-1839F3AAF96B</string>
+	<string>C1AA9DBC-EC91-49C5-8675-BBD3EED9A192</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Swift date转string</string>
+	<string>Swift 生成二维码</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
