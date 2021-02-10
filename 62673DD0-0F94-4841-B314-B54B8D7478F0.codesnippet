@@ -3,24 +3,27 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>ccafter</string>
+	<string>ccpop</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>DispatchQueue.main.asyncAfter(deadline: .now() + 1) {
-            
-            
-        }</string>
+	<string>                for vc in self.navigationController!.viewControllers {
+                    
+                    if vc.isKind(of: SafeVC.self) {
+                        self.navigationController?.popToViewController(vc, animated: true)
+                        return
+                    }
+                }</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>F846D8DE-D046-4A69-B18B-FF4825CFE632</string>
+	<string>62673DD0-0F94-4841-B314-B54B8D7478F0</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>延迟调用</string>
+	<string>Swift 导航栏但回到指定控制器</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
