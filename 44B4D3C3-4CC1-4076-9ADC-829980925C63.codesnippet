@@ -3,21 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>ccblock</string>
+	<string>ccupdateui</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@property (copy, nonatomic) &lt;#block#&gt; sureBlock;</string>
+	<string>// MARK:更新UI
+    @objc func updateUIAction() {
+        
+    }</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>23418A8F-0772-4484-B66E-3C98AC2D88F6</string>
+	<string>44B4D3C3-4CC1-4076-9ADC-829980925C63</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>创建block对象</string>
+	<string>Swift 更新UI</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

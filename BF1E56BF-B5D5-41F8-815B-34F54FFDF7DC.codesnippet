@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccpicture</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>
+import AVFoundation
+
+var photoView: UIView?                      // 拍照
+var photoShowView: UIImageView?
+var flag2 = false                       // 是否保留照片
+var captureSession: AVCaptureSession?
+
+
+if true {
+    
+    let view1 = UIView.init(frame: CGRect.init(x: kSpaceSize, y: height, width: kScreenWidth - kSpaceSize*2, height: 300))
+    view1.backgroundColor = .black
+    scrollView.addSubview(view1)
+    height = view1.c_bottom()
+    self.photoView = view1
+    
+    let icon = UIImageView.init(frame: CGRect.init(x:view1.c_width() - 60 - 5, y: 5, width: 60, height: 60))
+    icon.contentMode = .scaleAspectFit
+    view1.addSubview(icon)
+    self.photoShowView = icon
+    
+    let btn = UIButton.init(frame: view1.bounds)
+    btn.addTarget(self, action: #selector(button2Action(btn:)), for: .touchUpInside)
+    view1.addSubview(btn)
+}
+
+// MARK:点击拍照
+@objc func button2Action(btn: UIButton) {
+    
+    // 标志拍照
+    self.flag2 = true
+}
+
+
+// 拍照
+if self.captureSession == nil {
+    
+    self.captureSession = AVCaptureSession()
+    if self.captureSession?.canSetSessionPreset(.hd4K3840x2160) == true {
+        self.captureSession?.sessionPreset = .hd4K3840x2160
+    } else {
+        self.captureSession?.sessionPreset = .high
+    }
+    self.captureSession?.beginConfiguration()
+    
+    let previewLayer = AVCaptureVideoPreviewLayer.init(session: self.captureSession!)
+    previewLayer.frame = self.photoView!.bounds
+    previewLayer.videoGravity = .resizeAspect
+    self.photoView?.layer.addSublayer(previewLayer)
+    
+    let output = AVCaptureVideoDataOutput()
+    if self.captureSession?.canAddOutput(output) == true {
+        self.captureSession?.addOutput(output)
+        let queue = DispatchQueue(label: "BatteryProject")
+        output.setSampleBufferDelegate(self, queue: queue)
+        self.captureSession!.commitConfiguration()
+    }
+    
+    let availbleDevices = AVCaptureDevice.DiscoverySession(deviceTypes: [.builtInWideAngleCamera], mediaType: .video, position: .back).devices
+    let device = availbleDevices.first
+    do {
+        for input in self.captureSession!.inputs {
+            self.captureSession!.removeInput(input)
+        }
+        let input = try AVCaptureDeviceInput(device: device!)
+        self.captureSession!.addInput(input)
+        
+    } catch {
+    }
+}
+self.captureSession?.startRunning()
+
+self.captureSession?.stopRunning()
+
+
+// MARK:摄像机
+func captureOutput(_ output: AVCaptureOutput, didOutput sampleBuffer: CMSampleBuffer, from connection: AVCaptureConnection) {
+    
+    connection.videoOrientation = .portrait // 设置照片的方向
+    
+    // 保存图片
+    if self.flag2 == true {
+        
+        self.flag2 = false
+        DispatchQueue.main.async { [self] in
+            
+            if CMSampleBufferIsValid(sampleBuffer) != false {
+                
+                let pixelBuffer = CMSampleBufferGetImageBuffer(sampleBuffer)
+                let ciImage = CIImage(cvPixelBuffer: pixelBuffer!)
+                let uiImage = UIImage.init(ciImage: ciImage)
+                self.photoShowView?.image = uiImage
+            }
+        }
+    }
+    
+}
+
+</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>BF1E56BF-B5D5-41F8-815B-34F54FFDF7DC</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift 自定义拍照</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>0</integer>
+</dict>
+</plist>

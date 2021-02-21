@@ -3,21 +3,29 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>ccblock</string>
+	<string>cctimer</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@property (copy, nonatomic) &lt;#block#&gt; sureBlock;</string>
+	<string>self.timer = DispatchSource.makeTimerSource(flags: [], queue: DispatchQueue.main)
+        self.timer!.schedule(wallDeadline: .now(), repeating: 1)
+        self.timer!.setEventHandler(handler: {
+            
+            
+            
+        })
+        self.timer!.resume()
+        // self.timer?.cancel()</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>23418A8F-0772-4484-B66E-3C98AC2D88F6</string>
+	<string>1728A831-7EAB-4B58-8C10-BF38D6451483</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>创建block对象</string>
+	<string>Swift 定时器2</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

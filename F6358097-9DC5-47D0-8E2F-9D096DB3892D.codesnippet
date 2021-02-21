@@ -3,24 +3,24 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>ccblock</string>
+	<string>ccpicture</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@property (copy, nonatomic) &lt;#block#&gt; sureBlock;</string>
+	<string>UIImageWriteToSavedPhotosAlbum(uiImage, self, #selector(savedPhotosAlbum(image:didFinishSavingWithError:contextInfo:)), nil)</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>23418A8F-0772-4484-B66E-3C98AC2D88F6</string>
+	<string>F6358097-9DC5-47D0-8E2F-9D096DB3892D</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>创建block对象</string>
+	<string>Swift 保存图片1</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
-	<integer>2</integer>
+	<integer>0</integer>
 </dict>
 </plist>

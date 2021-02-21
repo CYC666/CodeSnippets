@@ -3,21 +3,30 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>ccaddtarget</string>
+	<string>ccarray</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>btn.addTarget(self, action: #selector(button2Action(btn:)), for: .touchUpInside)</string>
+	<string>let text: String = (resposeModel?.data)!
+                let jsonData: Data = text.data(using: .utf8)!
+                let array = try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)
+                if array != nil {
+                    
+                    let list = array as! Array&lt;String&gt;
+                    self.titleList = list
+                    self.loadDataAction2()
+                    
+                }</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>393FA7D2-C435-4220-BF53-409E2852D89C</string>
+	<string>9E55A1C9-4455-4583-952F-D30EDC2CF707</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>按钮添加响应</string>
+	<string>Swift JSON字符串转数组</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

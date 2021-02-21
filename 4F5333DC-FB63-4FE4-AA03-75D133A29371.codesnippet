@@ -3,21 +3,37 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>ccaddtarget</string>
+	<string>ccpicker</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>btn.addTarget(self, action: #selector(button2Action(btn:)), for: .touchUpInside)</string>
+	<string>    // MARK:选择了照片
+    func imagePickerController(_ picker: UIImagePickerController, didFinishPickingMediaWithInfo info: [UIImagePickerController.InfoKey : Any]) {
+        
+        let image = info[.originalImage]
+        
+        self.uploadImageAction(image as! UIImage)
+        
+        picker.dismiss(animated: true) {
+            
+        }
+    }
+
+    func imagePickerControllerDidCancel(_ picker: UIImagePickerController) {
+        picker.dismiss(animated: true) {
+            
+        }
+    }</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>393FA7D2-C435-4220-BF53-409E2852D89C</string>
+	<string>4F5333DC-FB63-4FE4-AA03-75D133A29371</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>按钮添加响应</string>
+	<string>Swift 图片选择2</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

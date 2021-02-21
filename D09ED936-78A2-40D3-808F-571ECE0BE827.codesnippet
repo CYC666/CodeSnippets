@@ -9,35 +9,38 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>        let method = "v1/mine/index"
-        let dic = ["" : ""]
+	<string>        let method = "v2/s/coin/baseCoin"
+        let dic = ["userId" : (kUserInfo.uid)!,
+                   "coinId" : "1003"
+        ]
         IndicatorView.show(self.view)
-        kNWork.requstPHPDatas(.get, urlString: method, parames: dic) { (obj) in
-
+        kNWork.requstJavaDatas(.get, urlString: method, parames: dic) { (obj) in
+            
             IndicatorView.hide(self.view)
-            let resposeModel = ResposeModel.deserialize(from: obj.dictionaryValue)
-            if resposeModel?.code == "200" {
-
-                let dataModel = RubbishModel.deserialize(from: resposeModel?.data)
-                print("success")
-
+            let resposeModel = ResposeJavaModel.deserialize(from: obj.dictionaryValue)
+            if resposeModel?.errcode == "0" {
+                
+                //                let dataModel = RubbishModel.deserialize(from: resposeModel?.data)
+                //                print("success")
+                
             } else {
-                ToastManager.makeToast((resposeModel?.message)!)
+                ToastManager.makeToast((resposeModel?.errmsg)!)
             }
-
-
+            
+            
         } falseBack: { () in
             IndicatorView.hide(self.view)
             ToastManager.makeToast("请检查网络")
-        }</string>
+        }
+            </string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>5CDB4B58-805D-40ED-9B93-C32072434C16</string>
+	<string>D09ED936-78A2-40D3-808F-571ECE0BE827</string>
 	<key>IDECodeSnippetLanguage</key>
 	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>Swift 发起网络请求</string>
+	<string>DQEX java请求</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

@@ -3,21 +3,25 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>ccblock</string>
+	<string>ccdate</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@property (copy, nonatomic) &lt;#block#&gt; sureBlock;</string>
+	<string>let date = Date.init(timeIntervalSince1970: (model.createdAt?.nsstring.doubleValue)!)
+let format = DateFormatter.init()
+format.dateFormat = "yyyy-MM-dd HH:mm:ss"
+let dateText = format.string(from: date)
+cell.label3?.text = dateText</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>23418A8F-0772-4484-B66E-3C98AC2D88F6</string>
+	<string>7C7C6E11-3D70-4452-AADB-AB9CFF18A7AA</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>创建block对象</string>
+	<string>Swift 时间戳转字符串</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

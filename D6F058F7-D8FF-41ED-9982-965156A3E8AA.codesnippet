@@ -3,21 +3,28 @@
 <plist version="1.0">
 <dict>
 	<key>IDECodeSnippetCompletionPrefix</key>
-	<string>ccblock</string>
+	<string>ccpicker</string>
 	<key>IDECodeSnippetCompletionScopes</key>
 	<array>
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@property (copy, nonatomic) &lt;#block#&gt; sureBlock;</string>
+	<string>let picker = UIImagePickerController.init()
+        picker.sourceType = .savedPhotosAlbum
+        picker.delegate = self
+        picker.modalPresentationStyle = .fullScreen
+        picker.navigationBar.isTranslucent = false
+        self.present(picker, animated: true) {
+            
+        }</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>23418A8F-0772-4484-B66E-3C98AC2D88F6</string>
+	<string>D6F058F7-D8FF-41ED-9982-965156A3E8AA</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Objective-C</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
 	<key>IDECodeSnippetSummary</key>
 	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>创建block对象</string>
+	<string>Swift 图片选择1</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>

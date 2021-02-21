@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccplayer</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>// 播放视频
+let path = Bundle.main.path(forResource: "movie", ofType: "mov")
+self.playerItem = AVPlayerItem.init(url: URL.init(fileURLWithPath: path!))
+self.player = AVPlayer.init(playerItem: self.playerItem)
+self.playerLayer = AVPlayerLayer.init(player: self.player)
+self.playerLayer?.frame = self.playerView!.bounds
+self.playerView?.layer.addSublayer(self.playerLayer!)
+self.player?.play()
+
+//// 监听播放结束
+//NotificationCenter.default.addObserver(self, selector: #selector(playerEndAction), name: NSNotification.Name.AVPlayerItemDidPlayToEndTime, object: self.playerItem)
+//
+//
+
+//// MARK:视频播放结束
+//@objc func playerEndAction() {
+//    
+//    // 重播
+//    var duration = self.playerItem?.duration
+//    duration?.value = 0
+//    self.playerItem?.seek(to: duration!, completionHandler: nil)
+//    self.player?.play()
+//}</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>D946D2F5-0374-4EF1-907D-A2711393B473</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift 播放本地视频</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>
