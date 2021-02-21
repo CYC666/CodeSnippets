@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>IDECodeSnippetCompletionPrefix</key>
+	<string>ccslider</string>
+	<key>IDECodeSnippetCompletionScopes</key>
+	<array>
+		<string>All</string>
+	</array>
+	<key>IDECodeSnippetContents</key>
+	<string>let slider = UISlider.init(frame: CGRect.init(x: 0, y: labL.c_bottom(), width: view3.c_width(), height: 25))
+                slider.minimumTrackTintColor = kSecColor
+                slider.maximumTrackTintColor = kLineColor
+                slider.setThumbImage(UIImage.init(named: "65"), for: .normal)
+                slider.minimumValue = 0
+                slider.maximumValue = 100
+                slider.value = 45
+                view3.addSubview(slider)</string>
+	<key>IDECodeSnippetIdentifier</key>
+	<string>0FDCB670-E11D-4D7E-B989-3B07B7BAE2BC</string>
+	<key>IDECodeSnippetLanguage</key>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
+	<key>IDECodeSnippetTitle</key>
+	<string>Swift slider</string>
+	<key>IDECodeSnippetUserSnippet</key>
+	<true/>
+	<key>IDECodeSnippetVersion</key>
+	<integer>2</integer>
+</dict>
+</plist>

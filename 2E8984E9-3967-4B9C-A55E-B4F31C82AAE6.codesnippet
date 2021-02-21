@@ -9,18 +9,15 @@
 		<string>All</string>
 	</array>
 	<key>IDECodeSnippetContents</key>
-	<string>@property (weak, nonatomic) IBOutlet UIButton *button1;     // 
-@property (weak, nonatomic) IBOutlet UIButton *button2;     // 
-@property (weak, nonatomic) IBOutlet UIButton *button3;     // 
-@property (weak, nonatomic) IBOutlet UIButton *button4;     // 
-@property (weak, nonatomic) IBOutlet UIButton *button5;     // 
-@property (weak, nonatomic) IBOutlet UIButton *button6;     // </string>
+	<string>var button: UIButton?</string>
 	<key>IDECodeSnippetIdentifier</key>
-	<string>3D44E4F4-0BC1-4361-9042-DAA72E324B9D</string>
+	<string>2E8984E9-3967-4B9C-A55E-B4F31C82AAE6</string>
 	<key>IDECodeSnippetLanguage</key>
-	<string>Xcode.SourceCodeLanguage.Generic</string>
+	<string>Xcode.SourceCodeLanguage.Swift</string>
+	<key>IDECodeSnippetSummary</key>
+	<string></string>
 	<key>IDECodeSnippetTitle</key>
-	<string>xib创建很多个button</string>
+	<string>Swift 定义button属性</string>
 	<key>IDECodeSnippetUserSnippet</key>
 	<true/>
 	<key>IDECodeSnippetVersion</key>
